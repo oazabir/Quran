@@ -1,0 +1,306 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  /*background-color: #d8d8d8;*/
+  font-family: Georgia;
+  /*display: none;*/
+}
+
+.clear { clear: both; display: block }
+
+.secondnavigation { margin-top: 30px; margin-bottom: 10px; }
+
+#header
+{
+  position:fixed; 
+  top:0; 
+  left:0; 
+  z-index:2000; 
+  width:100%;
+  background: white;
+}
+
+#headline {
+}
+
+#container {
+  background-repeat: no-repeat;
+  width: auto;
+  margin: auto;
+  -webkit-box-shadow: 0px 2px 3px #111;
+  -moz-box-shadow: 0px 2px 3px #111;
+}
+
+
+#headline h1 {
+    text-align: center;	
+}
+
+h2 {
+    font-family: Georgia;
+	text-align: left;
+	font-size: 1.5em;
+	line-height: 2em;
+	color: #111;
+	text-shadow: 0px 2px 3px #555;
+}
+
+h4 {
+    font-family: Georgia;
+	color: #111;
+	text-shadow: 0px 2px 3px #555;
+}
+
+
+#main {
+  /*width: 800px;*/
+  margin-top: 80px;
+  padding-bottom: 10px;
+}
+
+section {
+  padding-bottom: 20px;
+  overflow: auto;
+  padding-left: 5px;
+}
+
+p {
+	margin-bottom: 10px;
+}
+
+
+footer {
+	width: 800px;
+	margin: auto;
+	text-align: center;
+	font-size: 1em;
+    margin-top:15px;
+}
+
+footer ul {
+  border-top: solid 1px #989898;
+  padding-top: 5px;
+  padding-bottom: 20px;
+}
+
+
+footer a {
+	color: #222;
+	text-decoration: none;
+}
+
+footer a:hover {
+	color: #888;
+}
+
+footer li {
+	display: inline;
+	list-style-type: none;
+	padding-right: 25px;
+}
+
+.alignleft, img.alignleft 
+{
+    float: left;
+    margin: 5px;
+    /*border: 1px solid #DDDDDD;*/
+    width: auto;
+    height: 100px;
+    text-align: center;
+    -moz-border-radius: 7px;
+    padding: 2px;
+}
+
+.alignright, img.alignright {
+    float: right;
+    margin: 5px;
+    border: 1px solid #DDDDDD;
+    width: 140px;
+    height: 160px;
+    text-align: center;
+    -moz-border-radius: 7px;
+    padding: 2px;
+}
+
+.wordsContainer
+{
+/*    border: 1px solid #DDDDDD;
+    -moz-border-radius: 7px;*/
+    width: auto; 
+    height: auto; 
+    float: right;
+}
+
+
+.translator
+{
+    font: italic 16px/18px georgia;
+    color: #6798BF;
+    display: block;
+    font-size: 10pt;
+    line-height: 18px;
+    margin-left: 10px;
+}
+
+.content
+{
+    font-size: 14pt;
+    font-family: Georgia;
+    text-align: left;
+    line-height: 24px;
+    margin-left: 10px;
+}
+
+.wordbyword
+{
+    font-size: 10pt;
+    font-family: Georgia;
+    text-align: center;
+    line-height: 1.5em;
+    background-color: White;
+	margin-top: 10px;
+
+}
+.wordbyword img
+{
+    zoom: 80%;
+}
+
+
+.grammar 
+{
+    font-size: 80%;
+    line-height: 1em;
+    clear:both;
+    display:none;    
+}
+
+.transliteration>a
+{
+    text-decoration: none;
+    color: navy;
+    font-size: 80%;
+}
+
+.meaning 
+{
+    font: italic 14px/16px georgia;
+    font-weight: bolder;    
+    color: #202020;
+    text-align: center;    
+    border-bottom: 1px solid lightgrey;
+    padding-bottom: 2px;
+    margin-bottom: 2px; 
+}
+
+.menu { float: right }
+
+.arabicGrammar { display: none }
+
+.dropdowns { float: left }
+
+.navigation { margin-left: 20px; float: left }
+
+.type { color: green  }
+
+.button { font-size: 14pt; padding: 10px; }
+
+#pnlMyTranslationEdit { float: right; border: 2px solid lightgrey; padding: 10px; z-index: 10000 }
+.my_translation { padding: 10px; border: 1px solid lightgrey; }
+.my_translation_heading { font-size: 14pt;  }
+.my_translation_text { font-size: 16pt; }
+.my_translation_footnote { font-size: 12pt; margin-left: 20px; }
+
+#pnlMyTranslationEdit textarea, #pnlMyTranslationEdit input[type=text] {
+    width: 95%;
+}
+
+#pnlOriginal>p{ font-size: 36pt; line-height: 40px; font-family: 'Arabic Typesetting'; font-smooth: always; }
+
+.editor {
+    position: fixed;
+    top: 0px;
+    right: 0px;
+    width: 39%;          
+    height: 100%;
+    overflow: auto;      
+}
+
+#container.editorOn {
+    margin-right: 40%;
+}
+
+#corpus.editorOn {
+    overflow: scroll;
+    height: 300px;
+    margin-right: 40%;
+    position: fixed;
+    margin-bottom: 40px;
+}
+
+.segGray {
+    color: rgb(87, 87, 87);
+}
+
+.segSky {
+    color: rgb(84, 141, 212);
+}
+
+.segBlue {
+    color: rgb(37, 126, 156);
+}
+
+.segPurple {
+    color: rgb(129, 38, 192);
+}
+
+.segBrown {
+    color: rgb(191, 159, 62);
+}
+
+.segMetal {
+    color: rgb(92, 112, 133);
+}
+
+.segGold {
+    color: rgb(129, 116, 24);
+}
+
+.segSeagreen {
+    color: rgb(50, 189, 47);
+}
+
+.segGreen {
+    color: rgb(29, 105, 20);
+}
+
+.segRed {
+    color: rgb(244, 64, 11);
+}
+
+.segRust {
+    color: rgb(173, 35, 35);
+}
+
+.segPink {
+    color: rgb(168, 1, 123);
+}
+
+.segRose {
+    color: rgb(253, 81, 98);
+}
+
+.segNavy {
+    color: rgb(19, 1, 184);
+}
+
+.segOrange {
+    color: rgb(227, 112, 16);
+}
+
+.segSilver {
+    color: rgb(180, 180, 180);
+}

@@ -1,0 +1,25 @@
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\QuranObjects.dll
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\QuranObjects.pdb
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\EntityFramework.dll
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\EntityFramework.xml
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\ResolveAssemblyReference.cache
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\QuranObjects.dll
+C:\Users\604422604\Documents\My Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\QuranObjects.pdb
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\QuranObjects.dll
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\QuranObjects.pdb
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\EntityFramework.dll
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\System.Data.SqlServerCe.dll
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\System.Data.SqlServerCe.Entity.dll
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\bin\Release\EntityFramework.xml
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\QuranObjects.csprojResolveAssemblyReference.cache
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\QuranObjects.dll
+C:\Dropbox\Islam\CorpusReader\CorpusReader\QuranObjects\obj\Release\QuranObjects.pdb
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\QuranObjects.dll
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\QuranObjects.pdb
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\EntityFramework.dll
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\System.Data.SqlServerCe.dll
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\System.Data.SqlServerCe.Entity.dll
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\bin\Release\EntityFramework.xml
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\obj\Release\QuranObjects.csprojResolveAssemblyReference.cache
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\obj\Release\QuranObjects.dll
+C:\Users\Omar Al Zabir\Documents\GitHub\Quran\QuranObjects\obj\Release\QuranObjects.pdb
