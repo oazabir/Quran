@@ -166,6 +166,7 @@
     <Content Include="scripts\uframe\aa-ll-index.js" />
     <Content Include="scripts\uframe\htmlparser.js" />
     <Content Include="scripts\uframe\UFrame.js" />
+    <Content Include="Search.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="style.css" />
     <Content Include="Web.config">
@@ -186,6 +187,13 @@
     </Compile>
     <Compile Include="Corpus.aspx.designer.cs">
       <DependentUpon>Corpus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Search.aspx.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Search.aspx.designer.cs">
+      <DependentUpon>Search.aspx</DependentUpon>
     </Compile>
     <Compile Include="WordDetails.aspx.cs">
       <DependentUpon>WordDetails.aspx</DependentUpon>

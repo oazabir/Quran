@@ -58,6 +58,18 @@
                         }
                     });
 
+                $('#search')
+                    .focus(function () {
+                        $(this).val("");
+                    })
+                    .keypress(function (event) {
+                        if (event.keyCode == 13) {
+                            var text = $(this).val();
+                            document.location = "/Search.aspx?query=" + encodeURI(text) + "&arabic=" + Yamli.getInstances()[0].getEnabled();
+                            return false;
+                        }
+                    });
+
                 $("#MyTranslation").htmlarea({
                     css: "jHtmlArea/style/jHtmlArea.Editor.css",
                     toolbar: ["html", "bold", "italic", "subscript", "superscript"]
@@ -164,28 +176,28 @@
     <header>
         <div id="header" class="minimizable">
             <div id="headline">
-                <h1>Quran <%= Request["surah"]??"1" %>:<%= Request["ayah"]??"1" %></h1>
+                <h1>Al-Qur'aan <%= Request["surah"]??"1" %>:<%= Request["ayah"]??"1" %></h1>
             </div>
             <div class="dropdowns">
                 Surah: <asp:DropDownList ID="ddlSurahs" runat="server" autopostback="true"
                         onselectedindexchanged="ddlSurahs_SelectedIndexChanged"></asp:DropDownList><asp:Button runat="server" OnClick="ddlSurahs_SelectedIndexChanged" Text="Go" />
                         
                         <span style="width: 50px;"></span>
+                |
                 Ayah: 
                     <asp:DropDownList ID="ddlAyahs" runat="server" autopostback="true"
                         onselectedindexchanged="ddlAyahs_SelectedIndexChanged"></asp:DropDownList>
                     <asp:Button runat="server" OnClick="ddlAyahs_SelectedIndexChanged" Text="Go" />
-
-                Go to:
+                |
+                Goto Verse:
                 <input id="Goto" type="text" value="" size="10"/>
+                |
             </div>
             <div class="navigation">
-                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" />
-                <asp:HyperLink runat="server" Text="Next" ID="NextAyah" />
+                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah" />
             </div>
-
             <div class="menu">
-                <a href="/Settings.aspx">More Translations</a> 
+                <label>Search: <input id="search" type="text" size="20" /></label> | <a href="/Settings.aspx">Translations</a>                 
             </div>
         </div>
     </header>
@@ -196,7 +208,7 @@
                 <p>Loading Word by Word Translation from corpus.quran.com...</p>
             </div>
             		
-            <small class="clear">Source: <a href="http://corpus.quran.com">Quran.com</a></small>	
+            <small class="clear" style="float:right">Source: <a href="http://corpus.quran.com">corpus.quran.com</a></small>	
         </section>
 
         <section>
@@ -234,13 +246,7 @@
         
         <section>        
             <div class="clear secondnavigation minimizable">
-                <p>
-                    <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" />
-                    <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" />
-                </p>
-                <p>
-                    <a href="/Settings.aspx">More Translations</a>
-                </p>        
+                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" /> | <a href="/Settings.aspx">More Translations</a>                
             </div>
             <hr />
         </section>
@@ -276,4 +282,14 @@
 </div>
 </form>
 </body>
+
+<!-- YAMLI CODE START -->
+<script type="text/javascript" src="http://api.yamli.com/js/yamli_api.js"></script>
+<script type="text/javascript">
+    if (typeof (Yamli) == "object" && Yamli.init({ uiLanguage: "en", startMode: "onOrUserDefault" })) {
+        Yamli.yamlify("search", { settingsPlacement: "bottomLeft" });
+    }
+</script>
+<!-- YAMLI CODE END -->
+
 </html>

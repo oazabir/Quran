@@ -36,7 +36,12 @@ body {
 
 
 #headline h1 {
-    text-align: center;	
+    text-align: center;
+    font-size: 20pt;	
+    line-height: 45px;
+    font-family: Georgia;
+    color: #111;
+    text-shadow: 0px 2px 3px #555;
 }
 
 h2 {
@@ -303,4 +308,8 @@ footer li {
 
 .segSilver {
     color: rgb(180, 180, 180);
+}
+
+#search_box {
+    float: right;
 }
