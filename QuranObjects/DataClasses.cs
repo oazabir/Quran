@@ -55,9 +55,13 @@
         public int Order { get; set; }
         public int Type { get; set; }
         public bool ShowDefault { get; set; }
+        public int LanguageID { get; set; }
 
         [InverseProperty("Translator")]
         public ICollection<Ayah> Ayahs { get; set; }
+
+        [ForeignKey("LanguageID")]
+        public virtual Language Language { get; set; }
     }
 
     public class ArabicWord
@@ -137,7 +141,14 @@
         [InverseProperty("Root")]
         public ICollection<Meaning> WordMeanings { get; set; }
     }
+    public class Language
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public string Name { get; set; }
 
+    }
     public class QuranContext : DbContext
     {
         public DbSet<Ayah> Ayahs { get; set; }
@@ -147,6 +158,7 @@
         public DbSet<Meaning> Meanings { get; set; }
         public DbSet<GrammarForm> GrammarForms { get; set; }
         public DbSet<ArabicWord> ArabicWords { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         //public QuranContext()
         //    : base(ConfigurationManager.ConnectionStrings["QuranContext"].ConnectionString)
@@ -170,6 +182,7 @@
             modelBuilder.Entity<GrammarForm>().ToTable("GrammarForms");
             modelBuilder.Entity<Root>().ToTable("Roots");
             modelBuilder.Entity<Meaning>().ToTable("Meanings");
+            modelBuilder.Entity<Language>().ToTable("Languages");
 
             modelBuilder.Entity<ArabicWord>().HasRequired(a => a.GrammarForm).WithMany(g => g.ArabicWords).HasForeignKey(a => a.GrammarFormID).WillCascadeOnDelete(false);
             modelBuilder.Entity<ArabicWord>().HasRequired(a => a.Root).WithMany(r => r.ArabicWords).HasForeignKey(a => a.RootID).WillCascadeOnDelete(false);
