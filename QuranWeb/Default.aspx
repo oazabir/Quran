@@ -13,8 +13,8 @@
         <script src="/scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
         
         <link rel="Stylesheet" type="text/css" href="/jHtmlArea/style/jHtmlArea.css" />
-        <script  type="text/javascript" src="/scripts/jquery.htmlClean-min.js"></script>
-        <script  type="text/javascript" src="/jHtmlArea/scripts/jHtmlArea-0.7.0.min.js"></script>
+        <script src="/scripts/jquery.htmlClean-min.js"></script>
+        <script src="/jHtmlArea/scripts/jHtmlArea-0.7.0.min.js"></script>
 
         <script src="scripts/uframe/htmlparser.js" type="text/javascript"></script>
         <script src="scripts/uframe/UFrame.js" type="text/javascript"></script>
@@ -54,6 +54,18 @@
                                 var ayah = matches[2] || 1;
                                 document.location.href = "/" + surah + "/" + ayah;
                             }
+                            return false;
+                        }
+                    });
+
+                $('#search')
+                    .focus(function () {
+                        $(this).val("");
+                    })
+                    .keypress(function (event) {
+                        if (event.keyCode == 13) {
+                            var text = $(this).val();
+                            document.location = "/Search.aspx?query=" + encodeURI(text) + "&arabic=" + Yamli.getInstances()[0].getEnabled();
                             return false;
                         }
                     });
@@ -106,50 +118,11 @@
                 str = str.replace(/<([^>]*)>\s*<\/\1>/g, ""); //empty tags
                 return str.replace(/<\/(\w+)>(\S)/g, "</$1> $2");
             }
-            function ShowHideAllLanguage()
-            {
-                ShowHideAllSection('pnlGenAcceptedAll');
-                ShowHideAllSection('pnlControversalAll');
-                ShowHideAllSection('pnlNonMuslimAll');
 
-                return false;
-            }
-            function ShowHideAllSection(id) {
-                var pnl = id;
-                var lbl = 'lblLanguageAll';
-                if (document.getElementById(pnl).style.display == 'none') {
-                    document.getElementById(pnl).style.display = 'block';
-                    SetText(document.getElementById(lbl), "[Hide Other Languages]");
-                }
-                else {
-                    document.getElementById(pnl).style.display = 'none';
-                    SetText(document.getElementById(lbl), "[Show All Languages]");
-                }  
-                return false;
-            }
-            function SetText(elem, changeVal) {
-                if ((elem.textContent) && (typeof (elem.textContent) != "undefined")) {
-                    elem.textContent = changeVal;
-                } else {
-                    elem.innerText = changeVal;
-                }
-            }
-
-            function getCookie(c_name) {
-                var i, x, y, ARRcookies = document.cookie.split(";");
-                for (i = 0; i < ARRcookies.length; i++) {
-                    x = ARRcookies[i].substr(0, ARRcookies[i].indexOf("="));
-                    y = ARRcookies[i].substr(ARRcookies[i].indexOf("=") + 1);
-                    x = x.replace(/^\s+|\s+$/g, "");
-                    if (x == c_name) {
-                        return unescape(y);
-                    }
-                }
-            }
-
+            
 	    </script>
 
-        <style  type="text/css">
+        <style>
         <% if( Request["minimal"] == "1") { %>
             .minimizable { display: none }                                              
         <% } %>                                              
@@ -172,7 +145,7 @@
 <body>
 
 <form id="form1" runat="server" accept-charset="utf-8" >
-  
+
 <asp:Panel ID="pnlMyTranslationEdit" runat="server" CssClass="minimizable editor">
     <p>Heading</p>
     <asp:TextBox ID="Heading" runat="server" TextMode="SingleLine" Columns="30" Font-Size="14pt" />
@@ -203,30 +176,28 @@
     <header>
         <div id="header" class="minimizable">
             <div id="headline">
-                <h1>Quran <%= Request["surah"]??"1" %>:<%= Request["ayah"]??"1" %></h1>
+                <h1>Al-Qur'aan <%= Request["surah"]??"1" %>:<%= Request["ayah"]??"1" %></h1>
             </div>
             <div class="dropdowns">
                 Surah: <asp:DropDownList ID="ddlSurahs" runat="server" autopostback="true"
                         onselectedindexchanged="ddlSurahs_SelectedIndexChanged"></asp:DropDownList><asp:Button runat="server" OnClick="ddlSurahs_SelectedIndexChanged" Text="Go" />
                         
                         <span style="width: 50px;"></span>
+                |
                 Ayah: 
                     <asp:DropDownList ID="ddlAyahs" runat="server" autopostback="true"
                         onselectedindexchanged="ddlAyahs_SelectedIndexChanged"></asp:DropDownList>
                     <asp:Button runat="server" OnClick="ddlAyahs_SelectedIndexChanged" Text="Go" />
-
-                Go to:
+                |
+                Goto Verse:
                 <input id="Goto" type="text" value="" size="10"/>
+                |
             </div>
             <div class="navigation">
-                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" />
-                <asp:HyperLink runat="server" Text="Next" ID="NextAyah" />
+                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah" />
             </div>
-
             <div class="menu">
-                <asp:DropDownList ID="ddlLanguageFilter" runat="server" autopostback="true"
-                        onselectedindexchanged="ddlLanguageFilter_SelectedIndexChanged"></asp:DropDownList>
-                <a href="/Settings.aspx">More Translations</a> 
+                <label>Search: <input id="search" type="text" size="20" /></label> | <a href="/Settings.aspx">Translations</a>                 
             </div>
         </div>
     </header>
@@ -237,7 +208,7 @@
                 <p>Loading Word by Word Translation from corpus.quran.com...</p>
             </div>
             		
-            <small class="clear">Source: <a href="http://corpus.quran.com">Quran.com</a></small>	
+            <small class="clear" style="float:right">Source: <a href="http://corpus.quran.com">corpus.quran.com</a></small>	
         </section>
 
         <section>
@@ -258,16 +229,15 @@
                         <asp:Label ID="lblFootnote" class="my_translation_footnote" runat="server" />
                     </p>
                 </asp:Panel>
-              
+
                 <p class="type">Generally Accepted</p>
                 <asp:Panel ID="pnlAccepted" runat="server"></asp:Panel>
-                 <asp:Panel ID="pnlGenAcceptedAll" runat="server"   Style="display:none" ></asp:Panel>
+                
                 <p class="type">Controversal</p>
                 <asp:Panel ID="pnlControversal" runat="server"></asp:Panel>
-                 <asp:Panel ID="pnlControversalAll" runat="server"     Style="display:none" ></asp:Panel>
+                
                 <p class="type">Non-Muslim and/or Orientalist</p>
                 <asp:Panel ID="pnlNonMuslim" runat="server"></asp:Panel>
-                 <asp:Panel ID="pnlNonMuslimAll" runat="server"    Style="display:none" ></asp:Panel>
                 
             </div>
         </section>
@@ -276,15 +246,7 @@
         
         <section>        
             <div class="clear secondnavigation minimizable">
-                <p>
-                    <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" />
-                    <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" />
-                    |<a href="#" id="lnkLanguageAll" onclick="ShowHideAllLanguage();" >
-                     <asp:Label ID="lblLanguageAll" runat="server" Text="[Show All Languages]"></asp:Label> </a>
-                </p>
-                <p>
-                    <a href="/Settings.aspx">More Translations</a>
-                </p>        
+                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" /> | <a href="/Settings.aspx">More Translations</a>                
             </div>
             <hr />
         </section>
@@ -320,4 +282,14 @@
 </div>
 </form>
 </body>
+
+<!-- YAMLI CODE START -->
+<script type="text/javascript" src="http://api.yamli.com/js/yamli_api.js"></script>
+<script type="text/javascript">
+    if (typeof (Yamli) == "object" && Yamli.init({ uiLanguage: "en", startMode: "onOrUserDefault" })) {
+        Yamli.yamlify("search", { settingsPlacement: "bottomLeft" });
+    }
+</script>
+<!-- YAMLI CODE END -->
+
 </html>
