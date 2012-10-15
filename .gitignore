@@ -1,0 +1,7 @@
+/QuranWeb\Properties/PublishProfiles
+/QuranWeb/bin
+/QuranWeb/obj
+/QuranWeb/quran.azurewebsites.net.PublishSettings
+/*.suo
+/QuranObjects/obj
+/QuranObjects/bin

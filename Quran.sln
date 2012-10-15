@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuranObjects", "QuranObjects\QuranObjects.csproj", "{51B32B21-39B7-478C-81C1-CAC546949014}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QuranWeb", "QuranWeb\QuranWeb.csproj", "{F9CDD53E-8B62-4767-8EA6-B038179D8D6A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{51B32B21-39B7-478C-81C1-CAC546949014}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B32B21-39B7-478C-81C1-CAC546949014}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B32B21-39B7-478C-81C1-CAC546949014}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B32B21-39B7-478C-81C1-CAC546949014}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F9CDD53E-8B62-4767-8EA6-B038179D8D6A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9CDD53E-8B62-4767-8EA6-B038179D8D6A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9CDD53E-8B62-4767-8EA6-B038179D8D6A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9CDD53E-8B62-4767-8EA6-B038179D8D6A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
