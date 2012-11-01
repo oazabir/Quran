@@ -2,15 +2,16 @@ The project is in Visual Studio 2012 format. Please download Visual Studio 2012 
 
 First you have to setup the database. Go to the database folder and follow the readme to setup the Quran database.
 
-Then you just run the solution and it should work. Visual Studio might warn you about some missing files, ignore them. Just delete those files from solution and build the solution. 
+In this repository I have just upload the changes/modified items. You can merge it to your local version or get the working version from my another repo: https://github.com/mdismail/Code-Bin-LanguageFilter. 
+If you merge to your local copy, please don't forget to take a backup.
 
 
 
 Modification History:
 ---------------------
 
-02 Sep 2012: Author:mdismail
-	Issue # 2: Language Filter implemented.
+01 Oct 2012: Author:mdismail
+	Issue # 5: Show Surah Names in Drop down list.
 	Changes Items:
 	1.\QuranWeb\Default.aspx
 	2.\QuranWeb\Default.aspx.cs
