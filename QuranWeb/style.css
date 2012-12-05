@@ -313,3 +313,15 @@ footer li {
 #search_box {
     float: right;
 }
+
+#relevant_topics {
+    float: right;
+    width: 200px;
+    margin-left: 50px;
+}
+
+#relevant_topics a{
+    text-decoration: none;
+    border-bottom: 1px dotted navy;
+    color: navy;
+}

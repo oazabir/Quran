@@ -170,6 +170,8 @@
     <Content Include="Search.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="style.css" />
+    <Content Include="TopicAyahs.aspx" />
+    <Content Include="TopicIndex.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -195,6 +197,13 @@
     </Compile>
     <Compile Include="Search.aspx.designer.cs">
       <DependentUpon>Search.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="TopicAyahs.aspx.cs">
+      <DependentUpon>TopicAyahs.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="TopicAyahs.aspx.designer.cs">
+      <DependentUpon>TopicAyahs.aspx</DependentUpon>
     </Compile>
     <Compile Include="WordDetails.aspx.cs">
       <DependentUpon>WordDetails.aspx</DependentUpon>

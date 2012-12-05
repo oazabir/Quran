@@ -158,6 +158,21 @@
         public string Name { get; set; }
 
     }
+	
+	[Table("TopicAyahsMaps")]
+    public class TopicAyahsMap
+    {
+        [Key]
+        [DatabaseGenerated(System.ComponentModel.DataAnnotations.DatabaseGeneratedOption.Identity)]
+        public int ID { get; set; }
+
+        [Required]
+        public string Topic { get; set; }
+
+        [Required]
+        public string Ayahs { get; set; }
+    }
+
     public class QuranContext : DbContext
     {
         public DbSet<V_Surah> V_Surahs { get; set; }
@@ -169,6 +184,7 @@
         public DbSet<GrammarForm> GrammarForms { get; set; }
         public DbSet<ArabicWord> ArabicWords { get; set; }
         public DbSet<Language> Languages { get; set; }
+        public DbSet<TopicAyahsMap> TopicAyahsMaps { get; set; }
 
         //public QuranContext()
         //    : base(ConfigurationManager.ConnectionStrings["QuranContext"].ConnectionString)
@@ -186,6 +202,7 @@
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Ayah>().ToTable("Ayahs");
+            modelBuilder.Entity<TopicAyahsMap>().ToTable("TopicAyahsMaps");
             modelBuilder.Entity<Translator>().ToTable("Translators");
             modelBuilder.Entity<MyTranslation>().ToTable("MyTranslations");
             modelBuilder.Entity<ArabicWord>().ToTable("ArabicWords");

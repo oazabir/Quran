@@ -256,7 +256,20 @@ namespace QuranWeb
                     pnlTransliteration.Controls.Add(control);
             }
 
-            
+            //Render related topics
+            var selectedVerse = surah.ToString() + ":" + ayah.ToString();
+            var topics = (from t in _Quran.TopicAyahsMaps
+                          where t.Ayahs.Contains("\"" + selectedVerse + "\"")
+                          select t);
+
+            var topicName = string.Empty;
+            foreach (var topic in topics)
+            {
+                topicName += string.Format("<a class=\"topic\" href='#' onclick='topicDetails({1}); return false;'>{0}</a>", topic.Topic.Trim(), topic.ID.ToString()) + ", ";
+            }
+
+            topicName = !string.IsNullOrEmpty(topicName) ? topicName.Substring(0, topicName.LastIndexOf(',')) : "No relevant topic found";
+            pnlRelevantVerses.Controls.Add(new LiteralControl(topicName));
 
             RefreshNavigationState();
         }

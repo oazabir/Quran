@@ -128,6 +128,16 @@
                 str = str.replace(/<([^>]*)>\s*<\/\1>/g, ""); //empty tags
                 return str.replace(/<\/(\w+)>(\S)/g, "</$1> $2");
             }
+			
+			//Open a popup window that shows all related ayats against a topic
+            function topicDetails(topicId) {
+                var url = document.location.protocol + '//' + document.location.host + '/TopicAyahs.aspx?topicId=' + topicId;
+                $('#basic-modal-content>iframe').attr('src', url);
+                $('#basic-modal-content').modal();
+                $('#simplemodal-container').css('z-index', '20000');
+                return false;
+            }
+			
             function ShowHideAllLanguage() {
                 ShowHideAllSection('pnlGenAcceptedAll');
                 ShowHideAllSection('pnlControversalAll');
@@ -258,6 +268,11 @@
 
         <section>
             <div class="clear">
+                <div id="relevant_topics">
+                    <p class="type">Relevant Topics</p>
+                    <asp:Panel ID="pnlRelevantVerses" runat="server"></asp:Panel><br />
+                </div>
+
                 <p class="type">Arabic</p>
                 <asp:Panel ID="pnlOriginal" runat="server"></asp:Panel>
                 <asp:Panel ID="pnlTransliteration" runat="server"></asp:Panel>                
