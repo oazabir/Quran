@@ -1,1 +1,1 @@
-﻿<%@ WebHandler Language="C#" CodeBehind="GenerateWord.ashx.cs" Class="CorpusReader.GenerateWord" %>
+﻿<%@ WebHandler Language="C#" CodeBehind="GenerateWord.ashx.cs" Class="QuranWeb.GenerateWord" %>

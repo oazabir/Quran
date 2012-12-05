@@ -4,6 +4,7 @@ using System.Web.UI;
 using QuranObjects;
 using System.Web;
 using System.Text.RegularExpressions;
+using System.Web.UI.WebControls;
 
 namespace QuranWeb
 {
@@ -30,10 +31,15 @@ namespace QuranWeb
             }
             else
             {
-                for(var i = 1; i < 115; ++i)
+              
+
+               /* for(var i = 1; i < 115; ++i)
                 {
                     ddlSurahs.Items.Add(i.ToString());
-                }
+                }*/
+
+                LoadLanguageDropdown();
+                LoadSurahDropdown();
 
                 ddlSurahs.SelectedIndex = surah - 1;
                 ddlSurahs.SelectedValue = ddlSurahs.Items[ddlSurahs.SelectedIndex].Value;
@@ -135,7 +141,55 @@ namespace QuranWeb
         {
             Response.Redirect("~/" + ddlSurahs.SelectedValue + "/1");
         }
+        protected void ddlLanguageFilter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
+            //Request.Cookies.
+            Response.Cookies.Set(new System.Web.HttpCookie("language", ddlLanguageFilter.SelectedValue));
+            lblLanguageAll.Visible = languageId == 0 ? false : true;
+            LoadSurahDropdown();
+        }
+        private void LoadLanguageDropdown()
+        {
+            ddlLanguageFilter.Items.Clear();
+            foreach (var language in _Quran.Languages.OrderBy(t => t.ID))
+            {
+                var item = new ListItem(language.Name, language.ID.ToString());
+                // item.Selected = cookie == null ? translator.ShowDefault : !hideTranslations.Contains(translator.ID.ToString());
+                ddlLanguageFilter.Items.Add(item);
+            }
 
+            var languageIDCookie = Request.Cookies["language"];
+            if (languageIDCookie != null)
+                ddlLanguageFilter.SelectedValue = languageIDCookie.Value;
+            lblLanguageAll.Visible = ddlLanguageFilter.SelectedValue == "0" ? false : true;
+        }
+        private void LoadSurahDropdown()
+        {
+            int surahNo = ddlSurahs.SelectedIndex;
+            ddlSurahs.Items.Clear();
+
+            var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
+            ////var languageId = 1;
+            ////var languageIDCookie = Request.Cookies["language"];
+            ////if (languageIDCookie != null)
+            ////    languageId = Convert.ToInt16(languageIDCookie.Value);
+            if (languageId == 0) languageId = 1;
+            var surahs = (from a in _Quran.V_Surahs
+                          where a.LanguageID == languageId
+                                orderby a.ID
+                                select a).ToList().AsQueryable();
+
+            foreach (var surah in surahs.OrderBy(t => t.ID))
+            {
+                var item = new ListItem(surah.Name, surah.ID.ToString());
+                // item.Selected = cookie == null ? translator.ShowDefault : !hideTranslations.Contains(translator.ID.ToString());
+                ddlSurahs.Items.Add(item);
+            }
+
+            if (surahNo < 0) surahNo = 0;
+            ddlSurahs.SelectedIndex = surahNo;
+        }
         private void LoadAyahDropdown()
         {
             var surahNo = int.Parse(ddlSurahs.SelectedValue);
@@ -171,7 +225,7 @@ namespace QuranWeb
                     .OrderBy(t => t.Translator.Order);
             else
                 translations = translations.Where(t => !hiddenTranslations.Contains(t.TranslatorID.ToString())).OrderBy(t => t.Translator.Order);
-
+            var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
             foreach (var translation in translations)
             {                
                 var control = new LiteralControl(string.Format("<div class=\"translator\">{0}</div><p class=\"content\">{1}</p>", 
@@ -180,11 +234,24 @@ namespace QuranWeb
                 if (translation.Translator.Type == 0)
                     pnlOriginal.Controls.Add(control);
                 else if (translation.Translator.Type == 1)
-                    pnlAccepted.Controls.Add(control);
+                {
+                    if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                        pnlAccepted.Controls.Add(control);
+                    else pnlGenAcceptedAll.Controls.Add(control);
+                }
                 else if (translation.Translator.Type == 2)
-                    pnlControversal.Controls.Add(control);
+                {
+                    if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                        pnlControversal.Controls.Add(control);
+                    else pnlControversalAll.Controls.Add(control);
+                }
+
                 else if (translation.Translator.Type == 3)
-                    pnlNonMuslim.Controls.Add(control);
+                {
+                    if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                        pnlNonMuslim.Controls.Add(control);
+                    else pnlNonMuslimAll.Controls.Add(control);
+                }
                 else if (translation.Translator.Type == 4)
                     pnlTransliteration.Controls.Add(control);
             }

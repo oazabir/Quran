@@ -160,6 +160,7 @@
     <Content Include="scripts\Dictionary.js" />
     <Content Include="scripts\jquery-1.4.3.min.js" />
     <Content Include="scripts\jquery.htmlClean-min.js" />
+    <Content Include="scripts\jquery.searchabledropdown-1.0.8.min.js" />
     <Content Include="scripts\qTip\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\uframe\aa-ha-index.js" />
     <Content Include="scripts\uframe\aa-hw-index.js" />

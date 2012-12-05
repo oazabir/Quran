@@ -112,6 +112,15 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.HyperLink NextAyah;
         
         /// <summary>
+        /// ddlLanguageFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLanguageFilter;
+        
+        /// <summary>
         /// pnlOriginal control.
         /// </summary>
         /// <remarks>
@@ -184,6 +193,15 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Panel pnlAccepted;
         
         /// <summary>
+        /// pnlGenAcceptedAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlGenAcceptedAll;
+        
+        /// <summary>
         /// pnlControversal control.
         /// </summary>
         /// <remarks>
@@ -193,6 +211,15 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Panel pnlControversal;
         
         /// <summary>
+        /// pnlControversalAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlControversalAll;
+        
+        /// <summary>
         /// pnlNonMuslim control.
         /// </summary>
         /// <remarks>
@@ -200,6 +227,15 @@ namespace QuranWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Panel pnlNonMuslim;
+        
+        /// <summary>
+        /// pnlNonMuslimAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlNonMuslimAll;
         
         /// <summary>
         /// PrevAyah2 control.
@@ -218,5 +254,14 @@ namespace QuranWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HyperLink NextAyah2;
+        
+        /// <summary>
+        /// lblLanguageAll control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblLanguageAll;
     }
 }

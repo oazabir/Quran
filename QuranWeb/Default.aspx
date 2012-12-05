@@ -11,10 +11,13 @@
         <link rel="stylesheet" media="screen" href="/style.css" />
         <link type="text/css" href="/scripts/basic/css/basic.css" rel="stylesheet" media="screen" />
         <script src="/scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
+        <script src="scripts/jquery.searchabledropdown-1.0.8.min.js"></script>
         
+        <% if (Request["edit"] != null) { %>
         <link rel="Stylesheet" type="text/css" href="/jHtmlArea/style/jHtmlArea.css" />
         <script src="/scripts/jquery.htmlClean-min.js"></script>
         <script src="/jHtmlArea/scripts/jHtmlArea-0.7.0.min.js"></script>
+        <% } %>
 
         <script src="scripts/uframe/htmlparser.js" type="text/javascript"></script>
         <script src="scripts/uframe/UFrame.js" type="text/javascript"></script>
@@ -40,6 +43,10 @@
             })(window.location.search.substr(1).split('&'));
 
             jQuery(document).ready(function () {
+
+                $(document).ready(function () {
+                    $("#<%=ddlSurahs.ClientID %>").searchable();
+                 });
 
                 $('#Goto')
                     .focus(function () { 
@@ -70,14 +77,17 @@
                         }
                     });
 
-                $("#MyTranslation").htmlarea({
-                    css: "jHtmlArea/style/jHtmlArea.Editor.css",
-                    toolbar: ["html", "bold", "italic", "subscript", "superscript"]
-                });
-                $("#Footnote").htmlarea({
-                    css: "jHtmlArea/style/jHtmlArea.Editor.css",
-                    toolbar: ["html", "bold", "italic", "subscript", "superscript"]
-                });
+                if ($("#MyTranslation").length > 0) {
+                    $("#MyTranslation").htmlarea({
+                        css: "jHtmlArea/style/jHtmlArea.Editor.css",
+                        toolbar: ["html", "bold", "italic", "subscript", "superscript"]
+                    });
+                    $("#Footnote").htmlarea({
+                        css: "jHtmlArea/style/jHtmlArea.Editor.css",
+                        toolbar: ["html", "bold", "italic", "subscript", "superscript"]
+                    });
+                }
+                
 
                 UFrameManager.init({
                     id: "corpus",  // id of the DIV
@@ -118,7 +128,33 @@
                 str = str.replace(/<([^>]*)>\s*<\/\1>/g, ""); //empty tags
                 return str.replace(/<\/(\w+)>(\S)/g, "</$1> $2");
             }
+            function ShowHideAllLanguage() {
+                ShowHideAllSection('pnlGenAcceptedAll');
+                ShowHideAllSection('pnlControversalAll');
+                ShowHideAllSection('pnlNonMuslimAll');
 
+                return false;
+            }
+            function ShowHideAllSection(id) {
+                var pnl = id;
+                var lbl = 'lblLanguageAll';
+                if (document.getElementById(pnl).style.display == 'none') {
+                    document.getElementById(pnl).style.display = 'block';
+                    SetText(document.getElementById(lbl), "[Hide Other Languages]");
+                }
+                else {
+                    document.getElementById(pnl).style.display = 'none';
+                    SetText(document.getElementById(lbl), "[Show All Languages]");
+                }
+                return false;
+            }
+            function SetText(elem, changeVal) {
+                if ((elem.textContent) && (typeof (elem.textContent) != "undefined")) {
+                    elem.textContent = changeVal;
+                } else {
+                    elem.innerText = changeVal;
+                }
+            }
             
 	    </script>
 
@@ -178,25 +214,34 @@
             <div id="headline">
                 <h1>Al-Qur'aan <%= Request["surah"]??"1" %>:<%= Request["ayah"]??"1" %></h1>
             </div>
-            <div class="dropdowns">
-                Surah: <asp:DropDownList ID="ddlSurahs" runat="server" autopostback="true"
-                        onselectedindexchanged="ddlSurahs_SelectedIndexChanged"></asp:DropDownList><asp:Button runat="server" OnClick="ddlSurahs_SelectedIndexChanged" Text="Go" />
-                        
-                        <span style="width: 50px;"></span>
-                |
-                Ayah: 
+            <div class="navigation">
+                <table>
+                    <tr>
+<td valign="middle">
+
+
+                Surah:</td><td><asp:DropDownList ID="ddlSurahs" runat="server" autopostback="true"
+                        onselectedindexchanged="ddlSurahs_SelectedIndexChanged"></asp:DropDownList></td><td>
+<asp:Button runat="server" OnClick="ddlSurahs_SelectedIndexChanged" Text="Go" />
+</td>                
+     <td  valign="middle">           Ayah: 
                     <asp:DropDownList ID="ddlAyahs" runat="server" autopostback="true"
                         onselectedindexchanged="ddlAyahs_SelectedIndexChanged"></asp:DropDownList>
                     <asp:Button runat="server" OnClick="ddlAyahs_SelectedIndexChanged" Text="Go" />
-                |
-                Goto Verse:
-                <input id="Goto" type="text" value="" size="10"/>
-                |
+</td>
+                        <td  valign="middle">Goto&nbsp;Verse:<input id="Goto" type="text" value="" size="10"/></td>
+                        <td><asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah" /></td>
+
+                    </tr>
+                </table>
+
+                        
+                
             </div>
-            <div class="navigation">
-                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah" />
-            </div>
+
             <div class="menu">
+                  <asp:DropDownList ID="ddlLanguageFilter" runat="server" autopostback="true"
+                        onselectedindexchanged="ddlLanguageFilter_SelectedIndexChanged"></asp:DropDownList>
                 <label>Search: <input id="search" type="text" size="20" /></label> | <a href="/Settings.aspx">Translations</a>                 
             </div>
         </div>
@@ -232,12 +277,13 @@
 
                 <p class="type">Generally Accepted</p>
                 <asp:Panel ID="pnlAccepted" runat="server"></asp:Panel>
-                
+                 <asp:Panel ID="pnlGenAcceptedAll" runat="server"   Style="display:none" ></asp:Panel>
                 <p class="type">Controversal</p>
                 <asp:Panel ID="pnlControversal" runat="server"></asp:Panel>
-                
+                 <asp:Panel ID="pnlControversalAll" runat="server"     Style="display:none" ></asp:Panel>
                 <p class="type">Non-Muslim and/or Orientalist</p>
                 <asp:Panel ID="pnlNonMuslim" runat="server"></asp:Panel>
+                 <asp:Panel ID="pnlNonMuslimAll" runat="server"    Style="display:none" ></asp:Panel>
                 
             </div>
         </section>
@@ -246,7 +292,8 @@
         
         <section>        
             <div class="clear secondnavigation minimizable">
-                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" /> | <a href="/Settings.aspx">More Translations</a>                
+                <asp:HyperLink runat="server" Text="Prev" ID="PrevAyah2" /> | <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" /> |<a href="#" id="lnkLanguageAll" onclick="ShowHideAllLanguage();" >
+                     <asp:Label ID="lblLanguageAll" runat="server" Text="[Show All Languages]"></asp:Label> </a>| <a href="/Settings.aspx">More Translations</a>                
             </div>
             <hr />
         </section>

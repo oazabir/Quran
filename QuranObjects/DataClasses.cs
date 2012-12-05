@@ -27,7 +27,16 @@
         [ForeignKey("TranslatorID")]
         public virtual Translator Translator { get; set; }
     }
+    [Table("V_Surahs")]
+    public class V_Surah
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public string Name { get; set; }
 
+        public int LanguageID { get; set; }
+    }
     public class MyTranslation
     {
         [Key]
@@ -55,9 +64,13 @@
         public int Order { get; set; }
         public int Type { get; set; }
         public bool ShowDefault { get; set; }
+        public int LanguageID { get; set; }
 
         [InverseProperty("Translator")]
         public ICollection<Ayah> Ayahs { get; set; }
+
+        [ForeignKey("LanguageID")]
+        public virtual Language Language { get; set; }
     }
 
     public class ArabicWord
@@ -137,9 +150,17 @@
         [InverseProperty("Root")]
         public ICollection<Meaning> WordMeanings { get; set; }
     }
+    public class Language
+    {
+        [Key]
+        public int ID { get; set; }
+        [Required]
+        public string Name { get; set; }
 
+    }
     public class QuranContext : DbContext
     {
+        public DbSet<V_Surah> V_Surahs { get; set; }
         public DbSet<Ayah> Ayahs { get; set; }
         public DbSet<Translator> Translators { get; set; }
         public DbSet<MyTranslation> MyTranslations { get; set; }
@@ -147,6 +168,7 @@
         public DbSet<Meaning> Meanings { get; set; }
         public DbSet<GrammarForm> GrammarForms { get; set; }
         public DbSet<ArabicWord> ArabicWords { get; set; }
+        public DbSet<Language> Languages { get; set; }
 
         //public QuranContext()
         //    : base(ConfigurationManager.ConnectionStrings["QuranContext"].ConnectionString)
