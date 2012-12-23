@@ -12,6 +12,42 @@ namespace QuranWeb
     {
         private readonly QuranContext _Quran = new QuranContext();
 
+        protected int NextSurahNo { get; set; }
+        protected int NextAyahNo { get; set; }
+        protected string PageTitle { get; set; }
+
+        protected int SurahNo
+        {
+            get
+            {
+                return Convert.ToInt32(Request["surah"] ?? "1");
+            }
+        }
+
+        protected int AyahNo
+        {
+            get
+            {
+                return Convert.ToInt32(Request["ayah"] ?? "1");
+            }
+        }
+
+        protected bool MinimalMode
+        {
+            get
+            {
+                return Request["minimal"] != null;
+            }
+        }
+
+        protected bool EditMode
+        {
+            get
+            {
+                return Request["edit"] != null;
+            }
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Request["surah"] == null)
@@ -23,21 +59,14 @@ namespace QuranWeb
                     Response.Redirect(lastCookie.Value);
             }
 
-            var surah = int.Parse(Request["surah"] ?? "1");
-            var ayah = int.Parse(Request["ayah"] ?? "1");
+            var surah = this.SurahNo;
+            var ayah = this.AyahNo;
 
             if(IsPostBack)
             {
             }
             else
             {
-              
-
-               /* for(var i = 1; i < 115; ++i)
-                {
-                    ddlSurahs.Items.Add(i.ToString());
-                }*/
-
                 LoadLanguageDropdown();
                 LoadSurahDropdown();
 
@@ -46,8 +75,13 @@ namespace QuranWeb
 
                 LoadAyahDropdown();
 
-                ddlAyahs.SelectedIndex = ayah - 1;
-                ddlAyahs.SelectedValue = ddlAyahs.Items[ddlAyahs.SelectedIndex].Value;
+                if (ayah <= ddlAyahs.Items.Count)
+                {
+                    ddlAyahs.SelectedIndex = ayah - 1;
+                    ddlAyahs.SelectedValue = ddlAyahs.Items[ddlAyahs.SelectedIndex].Value;
+                }
+
+                CalculateNextSurahAndAyah(surah, ayah);
                 
                 //LoadPageContent(int.Parse(ddlSurahs.SelectedValue), 1);   
             }
@@ -60,6 +94,32 @@ namespace QuranWeb
             var surah = int.Parse(ddlSurahs.SelectedValue ?? "1");
             var ayah = int.Parse(ddlAyahs.SelectedValue ?? "1");
 
+            ShowMyTranslation(surah, ayah);
+
+            Response.Cookies.Set(new System.Web.HttpCookie("last", ddlSurahs.SelectedValue + "/" + ddlAyahs.SelectedValue));
+
+            ShowHideMyTranslationEditor();
+
+            var surahName = GetSurahName(surah);
+            this.PageTitle = surahName + " " + surah + ":" + ayah;
+
+            _Quran.Dispose();
+        }
+
+        private void ShowHideMyTranslationEditor()
+        {
+            if (Request.QueryString["edit"] == null)
+            {
+                pnlMyTranslationEdit.Visible = false;
+            }
+            else
+            {
+                pnlMyTranslationEdit.Visible = true;
+            }
+        }
+
+        private void ShowMyTranslation(int surah, int ayah)
+        {
             var existingTranslation = _Quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
             if (existingTranslation != null)
             {
@@ -116,39 +176,26 @@ namespace QuranWeb
             }
             else
             {
-                if (banglaCookie != null && string.IsNullOrEmpty(banglaCookie.Value)) 
+                if (banglaCookie != null && string.IsNullOrEmpty(banglaCookie.Value))
                     banglaCookie.Value = "hide";
 
                 ToggleBangla.Text = "Show";
                 pnlMyTranslationView.Visible = false;
             }
-
-            Response.Cookies.Set(new System.Web.HttpCookie("last", ddlSurahs.SelectedValue + "/" + ddlAyahs.SelectedValue));
-
-            if (Request.QueryString["edit"] == null)
-            {
-                pnlMyTranslationEdit.Visible = false;                
-            }
-            else
-            {
-                pnlMyTranslationEdit.Visible = true;
-            }
-
-            _Quran.Dispose();
         }
 
         protected void ddlSurahs_SelectedIndexChanged(object sender, EventArgs e)
         {
             Response.Redirect("~/" + ddlSurahs.SelectedValue + "/1");
         }
+        
         protected void ddlLanguageFilter_SelectedIndexChanged(object sender, EventArgs e)
         {
             var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
-            //Request.Cookies.
             Response.Cookies.Set(new System.Web.HttpCookie("language", ddlLanguageFilter.SelectedValue));
-            lblLanguageAll.Visible = languageId == 0 ? false : true;
             LoadSurahDropdown();
         }
+        
         private void LoadLanguageDropdown()
         {
             ddlLanguageFilter.Items.Clear();
@@ -162,8 +209,23 @@ namespace QuranWeb
             var languageIDCookie = Request.Cookies["language"];
             if (languageIDCookie != null)
                 ddlLanguageFilter.SelectedValue = languageIDCookie.Value;
-            lblLanguageAll.Visible = ddlLanguageFilter.SelectedValue == "0" ? false : true;
+            //lblLanguageAll.Visible = ddlLanguageFilter.SelectedValue == "0" ? false : true;
         }
+
+        private string GetSurahName(int surahNo)
+        {
+            var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
+            if (languageId == 0) 
+                languageId = 1;
+            
+            var surahName = (from a in _Quran.V_Surahs
+                             where a.LanguageID == languageId
+                             orderby a.ID
+                             select a.Name).ToList().ElementAt(surahNo-1);
+
+            return surahName;
+        }
+
         private void LoadSurahDropdown()
         {
             int surahNo = ddlSurahs.SelectedIndex;
@@ -190,6 +252,7 @@ namespace QuranWeb
             if (surahNo < 0) surahNo = 0;
             ddlSurahs.SelectedIndex = surahNo;
         }
+
         private void LoadAyahDropdown()
         {
             var surahNo = int.Parse(ddlSurahs.SelectedValue);
@@ -204,8 +267,6 @@ namespace QuranWeb
                 ddlAyahs.Items.Add(i.ToString());
             }
             
-            //ddlAyahs.SelectedValue = "1";
-            //LoadPageContent(surahNo, 1);               
         }
 
         private void LoadPageContent(int surah, int ayah)
@@ -312,13 +373,32 @@ namespace QuranWeb
                 PrevAyah.NavigateUrl = currentSurahNo.ToString() + "/" + (currentAyahNo - 1).ToString();
             }
 
+            CalculateNextSurahAndAyah(currentSurahNo, currentAyahNo);
+
+            NextAyah.NavigateUrl = NextSurahNo + "/" + NextAyahNo;
+
+            if (Request.QueryString["edit"] != null)
+            {
+                PrevAyah.NavigateUrl += "?edit=1";
+                NextAyah.NavigateUrl += "?edit=1";
+            }
+
+            //PrevAyah2.Enabled = PrevAyah.Enabled;
+            //PrevAyah2.NavigateUrl = PrevAyah.NavigateUrl;
+            //NextAyah2.Enabled = NextAyah.Enabled;
+            //NextAyah2.NavigateUrl = NextAyah.NavigateUrl;
+        }
+
+        private void CalculateNextSurahAndAyah(int currentSurahNo, int currentAyahNo)
+        {
             // Next ayah link
             if (ddlAyahs.SelectedIndex == ddlAyahs.Items.Count - 1)
             {
                 // Last ayah, find the next surah
                 if (currentSurahNo < 114)
                 {
-                    NextAyah.NavigateUrl = (currentSurahNo + 1).ToString() + "/1";
+                    NextSurahNo = (currentSurahNo + 1);
+                    NextAyahNo = 1;
                 }
                 else
                 {
@@ -327,20 +407,10 @@ namespace QuranWeb
             }
             else
             {
-                NextAyah.NavigateUrl = currentSurahNo.ToString() + "/" + (currentAyahNo + 1).ToString();
+                //NextAyah.NavigateUrl = currentSurahNo.ToString() + "/" + (currentAyahNo + 1).ToString();
+                NextSurahNo = currentSurahNo;
+                NextAyahNo = currentAyahNo + 1;
             }
-
-            if (Request.QueryString["edit"] != null)
-            {
-                PrevAyah.NavigateUrl += "?edit=1";
-                NextAyah.NavigateUrl += "?edit=1";
-            }
-
-
-            PrevAyah2.Enabled = PrevAyah.Enabled;
-            PrevAyah2.NavigateUrl = PrevAyah.NavigateUrl;
-            NextAyah2.Enabled = NextAyah.Enabled;
-            NextAyah2.NavigateUrl = NextAyah.NavigateUrl;
         }
 
         protected void Save_Clicked(object sender, EventArgs e)

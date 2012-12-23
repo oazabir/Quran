@@ -148,51 +148,6 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Panel pnlTransliteration;
         
         /// <summary>
-        /// ToggleBangla control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ToggleBangla;
-        
-        /// <summary>
-        /// pnlMyTranslationView control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Panel pnlMyTranslationView;
-        
-        /// <summary>
-        /// lblHeading control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblHeading;
-        
-        /// <summary>
-        /// lblMyTranslation control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMyTranslation;
-        
-        /// <summary>
-        /// lblFootnote control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblFootnote;
-        
-        /// <summary>
         /// pnlAccepted control.
         /// </summary>
         /// <remarks>
@@ -247,30 +202,48 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Panel pnlNonMuslimAll;
         
         /// <summary>
-        /// PrevAyah2 control.
+        /// ToggleBangla control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink PrevAyah2;
+        protected global::System.Web.UI.WebControls.LinkButton ToggleBangla;
         
         /// <summary>
-        /// NextAyah2 control.
+        /// pnlMyTranslationView control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink NextAyah2;
+        protected global::System.Web.UI.WebControls.Panel pnlMyTranslationView;
         
         /// <summary>
-        /// lblLanguageAll control.
+        /// lblHeading control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLanguageAll;
+        protected global::System.Web.UI.WebControls.Label lblHeading;
+        
+        /// <summary>
+        /// lblMyTranslation control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMyTranslation;
+        
+        /// <summary>
+        /// lblFootnote control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblFootnote;
     }
 }
