@@ -44,10 +44,10 @@
     </style>
     <script src="/scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
     <script type="text/javascript" src="/scripts/basic/js/jquery.simplemodal.js"></script>
-    <script type="text/javascript" src="scripts/uframe/aa-ha-index.js"></script>
+<%--    <script type="text/javascript" src="scripts/uframe/aa-ha-index.js"></script>
     <script type="text/javascript" src="scripts/uframe/aa-hw-index.js"></script>
     <script type="text/javascript" src="scripts/uframe/aa-ll-index.js"></script>
-    <script type="text/javascript" src="scripts/Dictionary.js"></script>
+    <script type="text/javascript" src="scripts/Dictionary.js"></script>--%>
     <script type="text/javascript">
         jQuery(document).ready(function () {
             $("a.verse_ref").click(function (e) {
@@ -56,9 +56,9 @@
                 return false;
             });
 
-            var root = $('.root_arabic').text().replace(" ", "");
-            var hash = do_search(root);
-            $('#classical_dictionary').attr("href", "http://ejtaal.net/m/aa/" + hash);
+            //var root = $('.root_arabic').text().replace(" ", "");
+            //var hash = do_search(root);
+            //$('#classical_dictionary').attr("href", "http://ejtaal.net/m/aa/" + hash);
         });
     </script>
 </head>
@@ -69,7 +69,7 @@
         <p class="the_word"><asp:Literal ID="TheWord" runat="server" /></p>
         <p class="root_english"><asp:Literal ID="RootEnglish" runat="server" /> (<span class="root_arabic"><asp:Literal ID="RootArabic" runat="server" /></span>)</p>
         <p class="root_meanings"><label>Lexicon: </label><asp:Literal ID="RootMeanings" runat="server" /><small>Source: Project Root List</small></p>
-        <p class="root_meanings"><asp:HyperLink ID="DictionaryLink" runat="server" NavigateUrl="http://dictionary.speakarabicquickly.com/dictionary/search/{0}" Target="_blank">Modern Dictionary</asp:HyperLink> |  <a id="classical_dictionary" target="_blank" href="http://ejtaal.net/m/aa/#">Hans, Lane, Hava</a> </p>
+        <p class="root_meanings"><a runat="server" id="classical_dictionary" target="_blank" href="http://ejtaal.net/m/aa/#q={0}">Hans, Lane, Hava</a> </p>
         <p class="root_meanings"><label>Bangla: </label><asp:TextBox ID="BanglaMeanings" runat="server" Columns="50" CssClass="bangla_meaning_textbox" /><asp:Button runat="server" ID="SaveBanglaMeanings" OnClick="SaveBanglaMeanings_Clicked" Text="Save" /></p>
         <p class="other_meanings_of_arabic"><label>Other translations of same arabic:</label> 
             <asp:Repeater ID="OtherMeaningsOfArabic" runat="server">

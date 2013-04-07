@@ -52,6 +52,7 @@ namespace QuranWeb
                 }
 
                 RootArabic.Text = meaning.Root.RootArabic.Replace(" ", "");
+                classical_dictionary.HRef = string.Format(classical_dictionary.HRef, meaning.Root.RootArabic.Replace(" ", ""));
                 RootEnglish.Text = meaning.Root.RootEnglish;
                 RootMeanings.Text = meaning.Root.Meanings;
                 if (!Page.IsPostBack)
@@ -90,7 +91,7 @@ namespace QuranWeb
 
                 TotalRootUsage.Text = meaningFromRoot.Sum(m => m.Usage).ToString();
 
-                DictionaryLink.NavigateUrl = string.Format(DictionaryLink.NavigateUrl, meaning.Root.RootArabic.Replace(" ", ""));
+                //DictionaryLink.NavigateUrl = string.Format(DictionaryLink.NavigateUrl, meaning.Root.RootArabic.Replace(" ", ""));
             }
 
         }

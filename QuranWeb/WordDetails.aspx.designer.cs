@@ -58,13 +58,13 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Literal RootMeanings;
         
         /// <summary>
-        /// DictionaryLink control.
+        /// classical_dictionary control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HyperLink DictionaryLink;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor classical_dictionary;
         
         /// <summary>
         /// BanglaMeanings control.
