@@ -9,10 +9,27 @@
 <body>
     <form id="form1" runat="server">
     <div>
-        <a href="<%= GoBackUrl %>">Go back</a>
-        <asp:CheckBoxList ID="TranslationsList" runat="server" />
-
         <asp:Button ID="Save" Text="Save" runat="server" OnClick="Save_Clicked" />
+        <asp:Button ID="Reset" Text="Reset" runat="server" OnClick="Reset_Click" />
+        
+        <fieldset>
+            <legend>Settings</legend>
+            <p>
+                <asp:CheckBox ID="LeftToRightCheckbox" runat="server" Text="Show word by word translation left to right." />
+            </p>
+            <p>
+                <asp:CheckBox ID="DisableWordByWord" runat="server" Text="Don't show word by word transaction." />
+            </p>
+            <p>
+                <asp:CheckBox ID="ShowInProgressBangla" runat="server" Text="Show in progress Bangla transaction." />
+            </p>
+        </fieldset>
+        <fieldset>
+            <legend>Translations to show</legend>
+            <asp:CheckBoxList ID="TranslationsList" runat="server" />
+
+        </fieldset>
+        
     </div>
     </form>
 </body>

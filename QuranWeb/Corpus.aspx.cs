@@ -21,7 +21,8 @@ namespace QuranWeb
                 var surah = int.Parse(Request["surah"] ?? "1");
                 var ayah = int.Parse(Request["ayah"] ?? "1");
 
-                return HTMLParser.GetCorpusHtml(surah, ayah);
+                return HTMLParser.GetCorpusHtml(surah, ayah, 
+                    !(Request.Cookies["l"] != null && Request.Cookies["l"].Value == "1"));
             }
             catch (Exception x)
             {

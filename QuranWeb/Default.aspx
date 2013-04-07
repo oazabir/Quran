@@ -9,8 +9,8 @@
 
     <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
 
-    <link rel="stylesheet" media="screen" href="/style.css?v=6" />
-    <link type="text/css" href="/scripts/basic/css/basic.css" rel="stylesheet" media="screen" />
+    <link rel="stylesheet" media="screen" href="/1/1/style.css?v=13" />
+    <link type="text/css" href="/scripts/basic/css/basic.css?v=1" rel="stylesheet" media="screen" />
     <script src="/scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
     <script src="scripts/jquery.searchabledropdown-1.0.8.min.js"></script>
 
@@ -50,7 +50,7 @@
 
         window.loadNextAyah = function (event, force) {
             var scrollTop = $(window).scrollTop();
-            var docHeight = $(document).height();
+            var docHeight = $(document.body).height();
             var windowHeight = $(window).height();
 
             if (force || (docHeight > windowHeight && (scrollTop >= docHeight - windowHeight - 100))) {
@@ -93,8 +93,10 @@
             }
             else {
                 $(window).bind("scroll", window.loadNextAyah);
-                if ($(document).height() <= $(window).height())
-                    window.setTimeout(function() { window.loadNextAyah(null, true); }, 2000);
+                window.setTimeout(function() {
+                    if ($(document.body).height() <= $(window).height())
+                        window.setTimeout(function() { window.loadNextAyah(null, true); }, 2000);
+                }, 1000);
             }
 
             $("#<%=ddlSurahs.ClientID %>").searchable();
@@ -145,7 +147,7 @@
 
                 loadFrom: "/corpus.aspx",
                 initialLoad: "GET",
-                params: { "surah": surah, "ayah": ayah },   // parameters to post/get to 
+                params: { "surah": surah, "ayah": ayah, version: '2', "cookie": document.cookie },   // parameters to post/get to 
 
             });
         });
@@ -291,7 +293,7 @@
         </asp:Panel>
 
         <div id="container" class="<%= pnlMyTranslationEdit.Visible ? "editorOn" : "" %>">
-            <div id="header">
+            <div id="header" class="minimizable">
                 <div id="headline">
                     <h1><%= PageTitle %></h1>
                 </div>
@@ -322,23 +324,24 @@
                     </asp:DropDownList>
                     <label>Search:
                         <input id="search" type="text" size="20" /></label>
-                    | <a href="/Settings.aspx">Translations</a>
+                    | <a href="/Settings.aspx">Options</a>
                 </div>
             </div>
 
             <div id="main">
-                <div class="wordbyword_tip">Click on a word for detail analysis</div>
-                <div id="corpus" class="wordsContainer <%= pnlMyTranslationEdit.Visible ? "editorOn" : "" %>">
-                    <p>Loading Word by Word Translation from corpus.quran.com...</p>
+                <asp:Panel ID="WordByWordContainer" runat="server">
+                    <div class="wordbyword_tip">Click on a word for detail analysis</div>
+                    <div id="corpus" class="wordsContainer <%= pnlMyTranslationEdit.Visible ? "editorOn" : "" %>" >
+                        <p>Loading Word by Word Translation from corpus.quran.com...</p>
 
-                    <div class="clear"></div>
-                </div>
+                        <div class="clear"></div>
+                    </div>
 
-                <div id="source_corpus">Source: <a href="http://corpus.quran.com">corpus.quran.com</a></div>
-
-
-
+                    <div id="source_corpus">Source: <a href="http://corpus.quran.com">corpus.quran.com</a></div>
+                </asp:Panel>
                 <div id="translations">
+                    <asp:Label ID="AyahLabel" runat="server" />
+
                     <div id="relevant_topics">
                         <p class="type">Relevant Topics</p>
                         <i>
@@ -348,37 +351,50 @@
                         <a href="/TopicIndex.html">View Topic Index</a>
                     </div>
 
-                    <!--<p class="type">Arabic</p>-->
-                    <asp:Panel ID="pnlOriginal" runat="server"></asp:Panel>
-                    <asp:Panel ID="pnlTransliteration" runat="server"></asp:Panel>
+                    <div class="translation_text">
 
-                    <!--<p class="type">Generally Accepted</p>-->
-                    <asp:Panel ID="pnlAccepted" runat="server"></asp:Panel>
-                    <asp:Panel ID="pnlGenAcceptedAll" runat="server" Style="display: none"></asp:Panel>
-                    
-                    <p class="type">Controversal</p>
-                    <asp:Panel ID="pnlControversal" runat="server"></asp:Panel>
-                    <asp:Panel ID="pnlControversalAll" runat="server" Style="display: none"></asp:Panel>
-                    
-                    <p class="type">Non-Muslim and/or Orientalist</p>
-                    <asp:Panel ID="pnlNonMuslim" runat="server"></asp:Panel>
-                    <asp:Panel ID="pnlNonMuslimAll" runat="server" Style="display: none"></asp:Panel>
+                        <!--<p class="type">Arabic</p>-->
+                        <asp:Panel ID="pnlOriginal" runat="server"></asp:Panel>
+                        
+                        <asp:Panel ID="pnlTransliteration" runat="server"></asp:Panel>
 
-                    <p class="type">
-                        Bangla (in progress) <small>
-                            <asp:LinkButton ID="ToggleBangla" runat="server" OnClick="ToggleBangla_Click" Text="Hide Bangla" ForeColor="Navy" /></small>
-                    </p>
-                    <asp:Panel ID="pnlMyTranslationView" runat="server">
-                        <p>
-                            <asp:Label ID="lblHeading" class="my_translation_heading" runat="server" />
+                        <!--<p class="type">Generally Accepted</p>-->
+                        <asp:Panel ID="pnlAccepted" runat="server"></asp:Panel>
+                        <asp:Panel ID="pnlGenAcceptedAll" runat="server" Style="display: none"></asp:Panel>
+                    
+                        <asp:Panel ID="pnlControversal" runat="server" Visible="false">
+                            <p class="type">Controversal</p>
+                    
+                        </asp:Panel>
+                        <asp:Panel ID="pnlControversalAll" runat="server" Style="display: none">
+                            <p class="type">Controversal</p>
+                    
+                        </asp:Panel>
+                    
+                        <asp:Panel ID="pnlNonMuslim" runat="server" Visible="false">
+                            <p class="type">Non-Muslim and/or Orientalist</p>
+                    
+                        </asp:Panel>
+                        <asp:Panel ID="pnlNonMuslimAll" runat="server" Style="display: none">
+                            <p class="type">Non-Muslim and/or Orientalist</p>
+                    
+                        </asp:Panel>
+
+                        <p class="type" id="BanglaInProgress" runat="server">
+                            Bangla (in progress)                                 
                         </p>
-                        <p>
-                            <asp:Label ID="lblMyTranslation" class="my_translation_text" runat="server" />
-                        </p>
-                        <p>
-                            <asp:Label ID="lblFootnote" class="my_translation_footnote" runat="server" />
-                        </p>
-                    </asp:Panel>
+                        <asp:Panel ID="pnlMyTranslationView" runat="server">
+                            <p>
+                                <asp:Label ID="lblHeading" class="my_translation_heading" runat="server" />
+                            </p>
+                            <p>
+                                <asp:Label ID="lblMyTranslation" class="my_translation_text" runat="server" />
+                            </p>
+                            <p>
+                                <asp:Label ID="lblFootnote" class="my_translation_footnote" runat="server" />
+                            </p>
+                        </asp:Panel>
+                    </div>
 
                 </div>
                 <%--<div class="clear secondnavigation minimizable">
@@ -387,28 +403,12 @@
                     <asp:HyperLink runat="server" Text="Next" ID="NextAyah2" />
                     | <a href="/Settings.aspx">More Translations</a>
                 </div>--%>
-                <hr />
-                <!--
-            <div class="discussion minimizable">
-                <div id="disqus_thread"></div>
-                <script type="text/javascript">
-                    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
-                    var disqus_shortname = 'quran-omaralzabir'; // required: replace example with your forum shortname
-                    var disqus_url = document.location.href.replace(/\?.*/, "");
-                    /* * * DON'T EDIT BELOW THIS LINE * * */
-                    (function () {
-                        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-                        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-                        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-                    })();
-                </script>
-            </div>
-            
-                -->
+                
+                
             </div>
 
             <div id="basic-modal-content">
-                <iframe src="" style="width: 600px; height: 500px; border: none" frameborder="0"></iframe>
+                <iframe src="" style="width: 600px; height: 400px; border: none" frameborder="0"></iframe>
             </div>
 
             <!--
@@ -418,7 +418,30 @@
             -->
             
         </div>
-    </form>
+    </form>    
+    <p class="source minimizable" align="right"><a href="https://github.com/oazabir/Quran/wiki">Get the Source Code</a></p>
+    <hr />
+            
+    <script id="_webengage_script_tag" type="text/javascript">
+        if (!minimal) {
+            window.webengageWidgetInit = window.webengageWidgetInit || function(){
+                webengage.init({
+                    licenseCode:"aa13163a"
+                }).onReady(function(){
+                    webengage.render();
+                });
+            };
+
+            (function(d){
+                var _we = d.createElement('script');
+                _we.type = 'text/javascript';
+                _we.async = true;
+                _we.src = (d.location.protocol == 'https:' ? "//ssl.widgets.webengage.com" : "//cdn.widgets.webengage.com") + "/js/widget/webengage-min-v-3.0.js";
+                var _sNode = d.getElementById('_webengage_script_tag');
+                _sNode.parentNode.insertBefore(_we, _sNode);
+            })(document);
+        }
+</script>
 </body>
 
 <!-- YAMLI CODE START -->

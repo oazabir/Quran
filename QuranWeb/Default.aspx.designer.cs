@@ -121,6 +121,24 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.DropDownList ddlLanguageFilter;
         
         /// <summary>
+        /// WordByWordContainer control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel WordByWordContainer;
+        
+        /// <summary>
+        /// AyahLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label AyahLabel;
+        
+        /// <summary>
         /// pnlRelevantVerses control.
         /// </summary>
         /// <remarks>
@@ -202,13 +220,13 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.Panel pnlNonMuslimAll;
         
         /// <summary>
-        /// ToggleBangla control.
+        /// BanglaInProgress control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton ToggleBangla;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl BanglaInProgress;
         
         /// <summary>
         /// pnlMyTranslationView control.

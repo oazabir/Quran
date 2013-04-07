@@ -37,17 +37,22 @@ body {
 #headline {
 }
 
+#WordByWordContainer {
+    clear: both;
+} 
+
 #container {
     background-repeat: no-repeat;
     width: auto;
     margin: auto;
-    -webkit-box-shadow: 0px 2px 3px #111;
-    -moz-box-shadow: 0px 2px 3px #111;
+    min-height: 430px;
 }
 
 
 #headline h1 {
-    text-align: center;
+    margin-left: 20px;
+    
+    text-align: left;
     font-size: 20pt;
     line-height: 45px;
     font-family: serif;
@@ -118,37 +123,21 @@ footer {
         padding-right: 25px;
     }
 
-.alignleft, img.alignleft {
-    float: left;
-    margin: 5px;
-    /*border: 1px solid #DDDDDD;*/
-    width: auto;
-    height: 100px;
-    text-align: center;
-    -moz-border-radius: 7px;
-    padding: 2px;
-}
-
-.alignright, img.alignright {
-    float: right;
-    margin: 5px;
-    border: 1px solid #DDDDDD;
-    width: 140px;
-    height: 160px;
-    text-align: center;
-    -moz-border-radius: 7px;
-    padding: 2px;
-}
-
-.wordsContainer {
-    /*    border: 1px solid #DDDDDD;
-    -moz-border-radius: 7px;*/
-    
-}
-
 #translations {
     padding-top: 20px;
+    padding-left: 10px;
     clear: both;
+}
+
+#AyahLabel {
+    left: 10px;
+    font-size: 20pt;
+    padding: 5px;
+    background-color: #FEF2DA;
+    color: #D6B169;
+    -webkit-border-radius: 10px;
+    float: left; 
+    margin-right: 10px;
 }
 
 .translator {
@@ -166,54 +155,6 @@ footer {
     text-align: left;
     line-height: 24px;
     margin-left: 10px;
-}
-
-.wordbyword {
-    font-size: 10pt;
-    font-family: Georgia;
-    text-align: center;
-    line-height: 1.5em;
-    background-color: White;
-    margin-top: 10px;
-    height: 120px;
-}
-
-    .wordbyword img {
-        height: 80px;
-    }
-
-
-.grammar {
-    font-size: 80%;
-    line-height: 1em;
-    clear: both;
-    display: none;
-}
-
-.transliteration > a {
-    text-decoration: none;
-    color: navy;
-    font-size: 80%;
-}
-
-.meaning {
-    font: italic 14px/16px georgia;
-    font-weight: bolder;
-    color: #202020;
-    text-align: center;
-    border-bottom: 1px solid lightgrey;
-    padding-bottom: 2px;
-    margin-bottom: 2px;
-}
-
-#menu {
-    float: right;
-    margin-right: 10px;
-    color: grey;
-}
-
-.arabicGrammar {
-    display: none;
 }
 
 .dropdowns {
@@ -290,14 +231,6 @@ footer {
 
 #container.editorOn {
     margin-right: 40%;
-}
-
-#corpus.editorOn {
-    overflow: scroll;
-    height: 300px;
-    margin-right: 40%;
-    position: fixed;
-    margin-bottom: 40px;
 }
 
 .segGray {
@@ -394,3 +327,9 @@ footer {
         text-decoration: none;
         border-bottom: 1px dotted lightgrey;
     }
+
+
+.source {
+    font-size: small;
+    
+}

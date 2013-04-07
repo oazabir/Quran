@@ -38,6 +38,10 @@ namespace QuranWeb
                     item.Selected = cookie == null ? translator.ShowDefault : !hideTranslations.Contains(translator.ID.ToString());
                     TranslationsList.Items.Add(item);
                 }
+
+                LeftToRightCheckbox.Checked = Request.Cookies["l"] != null && Request.Cookies["l"].Value == "1";
+                DisableWordByWord.Checked = Request.Cookies["w"] != null && Request.Cookies["w"].Value == "1";
+                ShowInProgressBangla.Checked = Request.Cookies["b"] != null && Request.Cookies["b"].Value == "1";
             }
         }
 
@@ -48,6 +52,10 @@ namespace QuranWeb
                               select item.Value).ToArray<string>());
             Response.Cookies.Set(new HttpCookie("hide") { Value = cookieValue });
 
+            Response.Cookies.Set(new HttpCookie("l", LeftToRightCheckbox.Checked ? "1" : "0"));
+            Response.Cookies.Set(new HttpCookie("w", DisableWordByWord.Checked ? "1" : "0"));
+            Response.Cookies.Set(new HttpCookie("b", ShowInProgressBangla.Checked ? "1" : "0"));
+
             Response.Redirect(GoBackUrl);
         }
 
@@ -56,6 +64,21 @@ namespace QuranWeb
             base.OnPreRender(e);
 
             _Quran.Dispose();
+        }
+
+        protected void Reset_Click(object sender, EventArgs e)
+        {
+            foreach (var cookieName in Request.Cookies.AllKeys)
+            {
+                var cookie = Request.Cookies[cookieName];
+                Response.Cookies.Set(new HttpCookie(cookie.Name, string.Empty)
+                {
+                    Path = cookie.Path,
+                    Expires = DateTime.Now.AddDays(-1)
+                });
+            }
+
+            Response.Redirect("/");
         }
     }
 }

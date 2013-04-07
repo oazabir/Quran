@@ -80,7 +80,9 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="alquanu.png" />
     <Content Include="Corpus.aspx" />
+    <Content Include="corpus.css" />
     <Content Include="Default.aspx" />
     <Content Include="fancybox\blank.gif" />
     <Content Include="fancybox\fancybox-x.png" />
@@ -170,6 +172,7 @@
     <Content Include="Search.aspx" />
     <Content Include="Settings.aspx" />
     <Content Include="style.css" />
+    <Content Include="Test.aspx" />
     <Content Include="TopicAyahs.aspx" />
     <Content Include="TopicIndex.html" />
     <Content Include="Web.config">
@@ -184,6 +187,7 @@
     <Content Include="WordDetails.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Code\RemoveETag.cs" />
     <Compile Include="Corpus.aspx.cs">
       <DependentUpon>Corpus.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

@@ -24,7 +24,7 @@ namespace QuranWeb
             return reader.ReadToEnd();
         }
 
-        public static string GetCorpusHtml(int surah, int ayah)
+        public static string GetCorpusHtml(int surah, int ayah, bool rightToLeft)
         {
             var url = string.Format(_VerseUrl, surah, ayah);
             var document = HttpContext.Current.Cache[url] as HtmlDocument;
@@ -67,16 +67,20 @@ namespace QuranWeb
 
                     var thirdCol = tds.Count > 2 ? tds[2].InnerHtml.Trim() : string.Empty;
 
-                    var html = "<div class=\"alignleft wordbyword\">"
-                        + "<div class=\"meaning\">" + tokens[2] + "</div>" 
+                    var html = "<div class=\"wordbyword\">" //"<div class=\"" + (rightToLeft ? "alignright" : "alignleft") + " wordbyword\">"
                         + "<div class=\"transliteration\">" + tokens[1] + "</div>"                        
                         + tds[1].InnerHtml.Replace("href=\"", "href=\"http://corpus.quran.com")
-                        + "<div class=\"grammar\">" + thirdCol + "</div>"                         
+                        + "<div class=\"grammar\">" + thirdCol + "</div>"
+                        + "<div class=\"meaning\">" + tokens[2] + "</div>"
                         + "</div>";
                     html = html.Replace("<img src=\"", "<img border=\"0\" src=\"" + _SiteHeader);
                     html = html.Replace("<a href=\"", "<a class=\"iframe\" href=\"" + _SiteHeader);
                     html = html.Replace("/images/verses/", _SiteHeader + "/images/verses/");
 
+                    //if (rightToLeft)
+                    //    buffer.Insert(0, html);
+                    //else
+                    //    buffer.Append(html);
                     buffer.Append(html);
                 }
                 else

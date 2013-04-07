@@ -5,6 +5,7 @@ using QuranObjects;
 using System.Web;
 using System.Text.RegularExpressions;
 using System.Web.UI.WebControls;
+using System.Collections.Generic;
 
 namespace QuranWeb
 {
@@ -94,14 +95,21 @@ namespace QuranWeb
             var surah = int.Parse(ddlSurahs.SelectedValue ?? "1");
             var ayah = int.Parse(ddlAyahs.SelectedValue ?? "1");
 
+            LoadPageContent(surah, ayah);
+            RefreshNavigationState();
+
             ShowMyTranslation(surah, ayah);
+
+            AyahLabel.Text = surah.ToString() + ":" + ayah.ToString();
+
+            WordByWordContainer.Visible = !(Request.Cookies["w"] != null && Request.Cookies["w"].Value == "1");
 
             Response.Cookies.Set(new System.Web.HttpCookie("last", ddlSurahs.SelectedValue + "/" + ddlAyahs.SelectedValue));
 
             ShowHideMyTranslationEditor();
 
             var surahName = GetSurahName(surah);
-            this.PageTitle = surahName + " " + surah + ":" + ayah;
+            this.PageTitle = surahName; // +" " + surah + ":" + ayah;
 
             _Quran.Dispose();
         }
@@ -120,6 +128,13 @@ namespace QuranWeb
 
         private void ShowMyTranslation(int surah, int ayah)
         {
+            var showBangla = Request.Cookies["b"] != null && Request.Cookies["b"].Value == "1";
+            
+            BanglaInProgress.Visible = showBangla;
+
+            if (!showBangla)
+                return;
+
             var existingTranslation = _Quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
             if (existingTranslation != null)
             {
@@ -164,22 +179,15 @@ namespace QuranWeb
                 lblFootnote.Text = string.Empty;
             }
 
-            LoadPageContent(surah, ayah);
-            RefreshNavigationState();
-
-
-            var banglaCookie = Response.Cookies.AllKeys.Contains("bangla") ? Response.Cookies["bangla"] : Request.Cookies.Get("bangla");
-            if (banglaCookie != null && banglaCookie.Value == "show")
+            //var banglaCookie = Response.Cookies.AllKeys.Contains("bangla") ? Response.Cookies["bangla"] : Request.Cookies.Get("bangla");
+            if (showBangla)
             {
                 pnlMyTranslationView.Visible = true;
-                ToggleBangla.Text = "Hide";
+                //ToggleBangla.Text = "Hide";
             }
             else
             {
-                if (banglaCookie != null && string.IsNullOrEmpty(banglaCookie.Value))
-                    banglaCookie.Value = "hide";
-
-                ToggleBangla.Text = "Show";
+                //ToggleBangla.Text = "Show";
                 pnlMyTranslationView.Visible = false;
             }
         }
@@ -199,7 +207,16 @@ namespace QuranWeb
         private void LoadLanguageDropdown()
         {
             ddlLanguageFilter.Items.Clear();
-            foreach (var language in _Quran.Languages.OrderBy(t => t.ID))
+
+            var cacheKey = "Languages";
+            var languages = Cache[cacheKey] as List<Language>;
+            if (languages == null)
+            {
+                languages = _Quran.Languages.OrderBy(t => t.ID).ToList();
+                Cache[cacheKey] = languages;
+            }
+
+            foreach (var language in languages)
             {
                 var item = new ListItem(language.Name, language.ID.ToString());
                 // item.Selected = cookie == null ? translator.ShowDefault : !hideTranslations.Contains(translator.ID.ToString());
@@ -217,13 +234,30 @@ namespace QuranWeb
             var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
             if (languageId == 0) 
                 languageId = 1;
-            
-            var surahName = (from a in _Quran.V_Surahs
-                             where a.LanguageID == languageId
-                             orderby a.ID
-                             select a.Name).ToList().ElementAt(surahNo-1);
+
+            var surahName = GetSurahNames(languageId).ElementAt(surahNo - 1).Name;
 
             return surahName;
+        }
+
+        private List<V_Surah> GetSurahNames(int languageId)
+        {
+            var cacheKey = "SurahNames." + languageId;
+            var surahNames = Cache[cacheKey] as List<V_Surah>;
+            if (surahNames == null)
+            {
+                surahNames = (from a in _Quran.V_Surahs
+                    where a.LanguageID == languageId
+                    orderby a.ID
+                    select a).ToList();
+                Cache[cacheKey] = surahNames;
+                return surahNames;
+            }
+            else
+            {
+                return surahNames;
+            }
+            
         }
 
         private void LoadSurahDropdown()
@@ -237,10 +271,7 @@ namespace QuranWeb
             ////if (languageIDCookie != null)
             ////    languageId = Convert.ToInt16(languageIDCookie.Value);
             if (languageId == 0) languageId = 1;
-            var surahs = (from a in _Quran.V_Surahs
-                          where a.LanguageID == languageId
-                                orderby a.ID
-                                select a).ToList().AsQueryable();
+            var surahs = GetSurahNames(languageId);
 
             foreach (var surah in surahs.OrderBy(t => t.ID))
             {
@@ -258,7 +289,7 @@ namespace QuranWeb
             var surahNo = int.Parse(ddlSurahs.SelectedValue);
 
             var ayahCount =
-                (from a in _Quran.Ayahs where a.SurahNo == surahNo orderby a.AyahNo descending select a).FirstOrDefault().AyahNo;
+                GetAyahCount(surahNo);
 
             ddlAyahs.Items.Clear();
 
@@ -269,12 +300,26 @@ namespace QuranWeb
             
         }
 
+        private int GetAyahCount(int surahNo)
+        {
+            var cacheKey = "AyahCount." + surahNo;
+            var ayahCount = Cache[cacheKey];
+            if (ayahCount == null)
+            {
+                ayahCount = (from a in _Quran.Ayahs where a.SurahNo == surahNo orderby a.AyahNo descending select a).FirstOrDefault().AyahNo;
+                Cache[cacheKey] = ayahCount;
+                return (int)ayahCount;
+            }
+            else
+            {
+                return (int)ayahCount;
+            }
+            
+        }
+
         private void LoadPageContent(int surah, int ayah)
         {
-            var translations = (from a in _Quran.Ayahs 
-                              where a.SurahNo == surah && a.AyahNo == ayah 
-                              orderby a.Translator.Order 
-                              select a).ToList().AsQueryable();
+            var translations = GetTranslations(surah, ayah).AsQueryable();
 
             var cookie = Request.Cookies["hide"];
             var cookieValue = cookie == null ? string.Empty : cookie.Value;
@@ -286,6 +331,7 @@ namespace QuranWeb
                     .OrderBy(t => t.Translator.Order);
             else
                 translations = translations.Where(t => !hiddenTranslations.Contains(t.TranslatorID.ToString())).OrderBy(t => t.Translator.Order);
+
             var languageId = int.Parse(ddlLanguageFilter.SelectedValue);
             foreach (var translation in translations)
             {                
@@ -297,32 +343,62 @@ namespace QuranWeb
                 else if (translation.Translator.Type == 1)
                 {
                     if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                    {
                         pnlAccepted.Controls.Add(control);
-                    else pnlGenAcceptedAll.Controls.Add(control);
+                        pnlAccepted.Visible = true;
+                    }
+                    else
+                    {
+                        pnlGenAcceptedAll.Controls.Add(control);
+                        pnlGenAcceptedAll.Visible = true;
+                    }
                 }
                 else if (translation.Translator.Type == 2)
                 {
                     if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                    {
                         pnlControversal.Controls.Add(control);
-                    else pnlControversalAll.Controls.Add(control);
+                        pnlControversal.Visible = true;
+                    }
+                    else
+                    {
+                        pnlControversalAll.Controls.Add(control);
+                        pnlControversalAll.Visible = true;
+                    }
                 }
 
                 else if (translation.Translator.Type == 3)
                 {
                     if (languageId == 0 || translation.Translator.LanguageID == languageId)
+                    {
                         pnlNonMuslim.Controls.Add(control);
-                    else pnlNonMuslimAll.Controls.Add(control);
+                        pnlNonMuslim.Visible = true;
+                    }
+                    else
+                    {
+                        pnlNonMuslimAll.Controls.Add(control);
+                        pnlNonMuslimAll.Visible = true;
+                    }
                 }
                 else if (translation.Translator.Type == 4)
+                {
                     pnlTransliteration.Controls.Add(control);
+                }
             }
 
             //Render related topics
             var selectedVerse = surah.ToString() + ":" + ayah.ToString();
-            var topics = (from t in _Quran.TopicAyahsMaps
-                          where t.Ayahs.Contains("\"" + selectedVerse + "\"")
-                          select t);
 
+            var cacheKey = "TopicMap." + surah + "." + ayah;
+            var topics = Cache[cacheKey] as List<TopicAyahsMap>;
+            if (topics == null)
+            {
+                topics = (from t in _Quran.TopicAyahsMaps
+                          where t.Ayahs.Contains("\"" + selectedVerse + "\"")
+                          select t).ToList();
+                Cache[cacheKey] = topics;
+            }
+            
             var topicName = string.Empty;
             foreach (var topic in topics)
             {
@@ -333,6 +409,23 @@ namespace QuranWeb
             pnlRelevantVerses.Controls.Add(new LiteralControl(topicName));
 
             RefreshNavigationState();
+        }
+
+        private List<Ayah> GetTranslations(int surah, int ayah)
+        {
+            var cacheKey = "Translations." + surah + "." + ayah;
+            var cached = Cache[cacheKey] as List<Ayah>;
+            if (cached != null)
+                return cached;
+            else
+            {
+                var translations = (from a in _Quran.Ayahs
+                        where a.SurahNo == surah && a.AyahNo == ayah
+                        orderby a.Translator.Order
+                        select a).ToList();
+                Cache[cacheKey] = translations;
+                return translations;
+            }
         }
 
         protected void ddlAyahs_SelectedIndexChanged(object sender, EventArgs e)
@@ -358,10 +451,11 @@ namespace QuranWeb
                 // find the last ayah of the previous surah
                 if (ddlSurahs.SelectedIndex > 0)
                 {
-                    var lastAyahNo = (from ayah in _Quran.Ayahs
-                                      where ayah.SurahNo == currentSurahNo-1
-                                      orderby ayah.AyahNo descending
-                                      select ayah.AyahNo).First();
+                    //var lastAyahNo = (from ayah in _Quran.Ayahs
+                    //                  where ayah.SurahNo == currentSurahNo-1
+                    //                  orderby ayah.AyahNo descending
+                    //                  select ayah.AyahNo).First();
+                    var lastAyahNo = GetAyahCount(currentSurahNo - 1);
                     PrevAyah.NavigateUrl = (currentSurahNo-1).ToString() + "/" + lastAyahNo.ToString();
                     PrevAyah.Enabled = true;
                 }
@@ -455,26 +549,26 @@ namespace QuranWeb
             }
         }
 
-        protected void ToggleBangla_Click(object sender, EventArgs e)
-        {
-            var cookie = Request.Cookies["bangla"];
-            if (cookie == null)
-            {
-                Response.Cookies.Add(new HttpCookie("bangla", "show")
-                {
-                    Path = "/"
-                });                
-            }
-            else
-            {
-                if (cookie.Value == "hide")
-                    cookie.Value = "show";
-                else
-                    cookie.Value = "hide";
+        //protected void ToggleBangla_Click(object sender, EventArgs e)
+        //{
+        //    var cookie = Request.Cookies["bangla"];
+        //    if (cookie == null)
+        //    {
+        //        Response.Cookies.Add(new HttpCookie("bangla", "show")
+        //        {
+        //            Path = "/"
+        //        });                
+        //    }
+        //    else
+        //    {
+        //        if (cookie.Value == "hide")
+        //            cookie.Value = "show";
+        //        else
+        //            cookie.Value = "hide";
                 
-                Response.Cookies.Set(cookie);
-            }
-        }
+        //        Response.Cookies.Set(cookie);
+        //    }
+        //}
 
 
     }

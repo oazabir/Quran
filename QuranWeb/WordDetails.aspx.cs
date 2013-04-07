@@ -42,7 +42,14 @@ namespace QuranWeb
                                                                                where am.RootID == m.RootID && am.EnglishMeaning == groupedMeaning.Key
                                                                                select am    
                                                              }
-                               }).First();
+                               }).FirstOrDefault();
+
+                if (meaning == null)
+                {
+                    Response.Write("Sorry no information available for this word");
+                    Response.End();
+                    return;
+                }
 
                 RootArabic.Text = meaning.Root.RootArabic.Replace(" ", "");
                 RootEnglish.Text = meaning.Root.RootEnglish;
