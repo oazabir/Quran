@@ -1,0 +1,97 @@
+﻿.wordsContainer {
+    /*    border: 1px solid #DDDDDD;
+    -moz-border-radius: 7px;*/
+    margin-right: 100px;
+    margin-left: 50px;
+    display: inline-block;
+    text-align: right;
+    direction: rtl;
+}
+
+.wordbyword {
+    font-size: 10pt;
+    font-family: Georgia;
+    text-align: center;
+    line-height: 1.5em;
+    background-color: White;
+    margin: 5px;
+    height: 120px;
+    display: inline-block;
+    position: relative;
+}
+
+    .wordbyword a>img {
+        height: 80px;
+    }
+
+
+.grammar {
+    font-size: 80%;
+    line-height: 1em;
+    clear: both;
+    display: none;
+}
+
+.transliteration > a {
+    text-decoration: none;
+    color: navy;
+    font-size: 80%;
+    display: none;
+}
+
+.phonetic {
+    display: none;
+}
+
+.meaning {
+    font: italic 14px/16px georgia;
+    font-weight: bolder;
+    color: #505050;
+    text-align: center;
+    /*border-bottom: 1px solid lightgrey;*/
+    /*padding-bottom: 2px;*/
+    margin-top: 10px;
+    direction: ltr;
+}
+
+#menu {
+    float: right;
+    margin-right: 10px;
+    color: grey;
+}
+
+.arabicGrammar {
+    display: none;
+}
+
+#corpus.editorOn {
+    overflow: scroll;
+    height: 300px;
+    margin-right: 40%;
+    position: fixed;
+    margin-bottom: 40px;
+}
+
+.alignleft, img.alignleft {
+    float: left;
+    margin: 5px;
+    /*border: 1px solid #DDDDDD;*/
+    width: auto;
+    height: 100px;
+    text-align: center;
+    -moz-border-radius: 7px;
+    padding: 2px;
+}
+
+.alignright, img.alignright {
+    float: right;
+    margin: 5px;
+    /*border: 1px solid #DDDDDD;*/
+    width: auto;
+    height: 100px;
+    text-align: center;
+    -moz-border-radius: 7px;
+    padding: 2px;
+    
+}
+
