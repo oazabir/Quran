@@ -163,6 +163,14 @@
     <Content Include="scripts\jquery-1.4.3.min.js" />
     <Content Include="scripts\jquery.htmlClean-min.js" />
     <Content Include="scripts\jquery.searchabledropdown-1.0.8.min.js" />
+    <Content Include="scripts\jsqari\Jplayer.swf" />
+    <Content Include="scripts\jsqari\jquery.jplayer.min.js" />
+    <Content Include="scripts\jsqari\jsqari.js" />
+    <Content Include="scripts\jsqari\skin\jplayer.blue.monday.video.play.hover.png" />
+    <Content Include="scripts\jsqari\skin\jplayer.blue.monday.video.play.png" />
+    <Content Include="scripts\jsqari\skin\jsqari.skin.css" />
+    <Content Include="scripts\jsqari\skin\jsqari.skin.jpg" />
+    <Content Include="scripts\jsqari\skin\pbar-ani.gif" />
     <Content Include="scripts\qTip\jquery.qtip-1.0.0-rc3.min.js" />
     <Content Include="scripts\uframe\aa-ha-index.js" />
     <Content Include="scripts\uframe\aa-hw-index.js" />

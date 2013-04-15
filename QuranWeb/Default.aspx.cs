@@ -11,7 +11,7 @@ namespace QuranWeb
 {
     public partial class Default : System.Web.UI.Page
     {
-        private readonly QuranContext _Quran = new QuranContext();
+        private QuranContext _Quran; 
 
         protected int NextSurahNo { get; set; }
         protected int NextAyahNo { get; set; }
@@ -51,6 +51,8 @@ namespace QuranWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            _Quran = new QuranContext();
+
             if (Request["surah"] == null)
             {
                 var lastCookie = Request.Cookies["last"];
@@ -109,9 +111,7 @@ namespace QuranWeb
             ShowHideMyTranslationEditor();
 
             var surahName = GetSurahName(surah);
-            this.PageTitle = surahName; // +" " + surah + ":" + ayah;
-
-            _Quran.Dispose();
+            this.PageTitle = surahName; // +" " + surah + ":" + ayah;            
         }
 
         private void ShowHideMyTranslationEditor()
@@ -570,6 +570,11 @@ namespace QuranWeb
         //    }
         //}
 
-
+        public override void Dispose()
+        {
+            base.Dispose();
+            
+            _Quran.Dispose();
+        }
     }
 }
