@@ -11,8 +11,6 @@ namespace QuranWeb
 {
     public partial class Default : System.Web.UI.Page
     {
-        private QuranContext _Quran; 
-
         protected int NextSurahNo { get; set; }
         protected int NextAyahNo { get; set; }
         protected string PageTitle { get; set; }
@@ -51,8 +49,6 @@ namespace QuranWeb
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            _Quran = new QuranContext();
-
             if (Request["surah"] == null)
             {
                 var lastCookie = Request.Cookies["last"];
@@ -135,50 +131,52 @@ namespace QuranWeb
             if (!showBangla)
                 return;
 
-            var existingTranslation = _Quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
-            if (existingTranslation != null)
+            using (var quran = new QuranContext())
             {
-                NewPara.Checked = existingTranslation.NewParaAfterThis;
-                Heading.Text = existingTranslation.Heading;
-                MyTranslation.Text = existingTranslation.Translation;
-                Footnote.Text = existingTranslation.Footnote;
-
-                //lblMyTranslation.Text = existingTranslation.Translation;
-                var text = existingTranslation.Translation;
-                text = new Regex(@"\*+").Replace(text, (match) =>
+                var existingTranslation = quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
+                if (existingTranslation != null)
                 {
-                    // Each * is footnote number
-                    int footnoteIndex = match.Value.Length;
-                    //var footnoteId = "Footnote_" + existingTranslation.SurahNo + "_" + existingTranslation.AyahNo + "_" + footnoteIndex;
-                    return "<sup>" + (char)('a' + (char)(footnoteIndex - 1)) + "</sup>";
-                });
-                lblMyTranslation.Text = text;
+                    NewPara.Checked = existingTranslation.NewParaAfterThis;
+                    Heading.Text = existingTranslation.Heading;
+                    MyTranslation.Text = existingTranslation.Translation;
+                    Footnote.Text = existingTranslation.Footnote;
 
-                //lblFootnote.Text = existingTranslation.Footnote;
-                var matches = new Regex(@"(\*+)([^\*]*)").Matches(existingTranslation.Footnote);
-                var footnoteHtml = "";
-                foreach (Match match in matches)
-                {
-                    var footnoteCounter = match.Groups[1].Value.Length;
-                    var footnoteText = match.Groups[2].Value;
+                    //lblMyTranslation.Text = existingTranslation.Translation;
+                    var text = existingTranslation.Translation;
+                    text = new Regex(@"\*+").Replace(text, (match) =>
+                    {
+                        // Each * is footnote number
+                        int footnoteIndex = match.Value.Length;
+                        //var footnoteId = "Footnote_" + existingTranslation.SurahNo + "_" + existingTranslation.AyahNo + "_" + footnoteIndex;
+                        return "<sup>" + (char)('a' + (char)(footnoteIndex - 1)) + "</sup>";
+                    });
+                    lblMyTranslation.Text = text;
 
-                    footnoteHtml += "<p class=\"footnote\"><sup>"
-                        + (char)('a' + (char)(footnoteCounter - 1)) + "</sup> "
-                        + footnoteText + "</p>";
+                    //lblFootnote.Text = existingTranslation.Footnote;
+                    var matches = new Regex(@"(\*+)([^\*]*)").Matches(existingTranslation.Footnote);
+                    var footnoteHtml = "";
+                    foreach (Match match in matches)
+                    {
+                        var footnoteCounter = match.Groups[1].Value.Length;
+                        var footnoteText = match.Groups[2].Value;
+
+                        footnoteHtml += "<p class=\"footnote\"><sup>"
+                            + (char)('a' + (char)(footnoteCounter - 1)) + "</sup> "
+                            + footnoteText + "</p>";
+                    }
+                    lblFootnote.Text = footnoteHtml;
                 }
-                lblFootnote.Text = footnoteHtml;
-            }
-            else
-            {
-                NewPara.Checked = false;
-                Heading.Text = string.Empty;
-                MyTranslation.Text = string.Empty;
-                Footnote.Text = string.Empty;
+                else
+                {
+                    NewPara.Checked = false;
+                    Heading.Text = string.Empty;
+                    MyTranslation.Text = string.Empty;
+                    Footnote.Text = string.Empty;
 
-                lblMyTranslation.Text = string.Empty;
-                lblFootnote.Text = string.Empty;
+                    lblMyTranslation.Text = string.Empty;
+                    lblFootnote.Text = string.Empty;
+                }
             }
-
             //var banglaCookie = Response.Cookies.AllKeys.Contains("bangla") ? Response.Cookies["bangla"] : Request.Cookies.Get("bangla");
             if (showBangla)
             {
@@ -212,7 +210,8 @@ namespace QuranWeb
             var languages = Cache[cacheKey] as List<Language>;
             if (languages == null)
             {
-                languages = _Quran.Languages.OrderBy(t => t.ID).ToList();
+                using (var quran = new QuranContext())            
+                    languages = quran.Languages.OrderBy(t => t.ID).ToList();
                 Cache[cacheKey] = languages;
             }
 
@@ -246,10 +245,13 @@ namespace QuranWeb
             var surahNames = Cache[cacheKey] as List<V_Surah>;
             if (surahNames == null)
             {
-                surahNames = (from a in _Quran.V_Surahs
-                    where a.LanguageID == languageId
-                    orderby a.ID
-                    select a).ToList();
+                using (var quran = new QuranContext())
+                {
+                    surahNames = (from a in quran.V_Surahs
+                                  where a.LanguageID == languageId
+                                  orderby a.ID
+                                  select a).ToList();
+                }
                 Cache[cacheKey] = surahNames;
                 return surahNames;
             }
@@ -306,7 +308,8 @@ namespace QuranWeb
             var ayahCount = Cache[cacheKey];
             if (ayahCount == null)
             {
-                ayahCount = (from a in _Quran.Ayahs where a.SurahNo == surahNo orderby a.AyahNo descending select a).FirstOrDefault().AyahNo;
+                using (var quran = new QuranContext())
+                    ayahCount = (from a in quran.Ayahs where a.SurahNo == surahNo orderby a.AyahNo descending select a).FirstOrDefault().AyahNo;
                 Cache[cacheKey] = ayahCount;
                 return (int)ayahCount;
             }
@@ -393,9 +396,12 @@ namespace QuranWeb
             var topics = Cache[cacheKey] as List<TopicAyahsMap>;
             if (topics == null)
             {
-                topics = (from t in _Quran.TopicAyahsMaps
-                          where t.Ayahs.Contains("\"" + selectedVerse + "\"")
-                          select t).ToList();
+                using (var quran = new QuranContext())
+                {
+                    topics = (from t in quran.TopicAyahsMaps
+                              where t.Ayahs.Contains("\"" + selectedVerse + "\"")
+                              select t).ToList();
+                }
                 Cache[cacheKey] = topics;
             }
             
@@ -419,12 +425,15 @@ namespace QuranWeb
                 return cached;
             else
             {
-                var translations = (from a in _Quran.Ayahs
-                        where a.SurahNo == surah && a.AyahNo == ayah
-                        orderby a.Translator.Order
-                        select a).ToList();
-                Cache[cacheKey] = translations;
-                return translations;
+                using (var quran = new QuranContext())
+                {
+                    var translations = (from a in quran.Ayahs.Include("Translator")
+                                        where a.SurahNo == surah && a.AyahNo == ayah
+                                        orderby a.Translator.Order
+                                        select a).ToList();
+                    Cache[cacheKey] = translations;
+                    return translations;
+                }
             }
         }
 
@@ -517,35 +526,38 @@ namespace QuranWeb
             var surah = int.Parse(Request["surah"] ?? "1");
             var ayah = int.Parse(Request["ayah"] ?? "1");
 
-            var existingTranslation = _Quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
-            if (existingTranslation == null)
+            using (var quran = new QuranContext())
             {
-                var newTranslation = new MyTranslation
+                var existingTranslation = quran.MyTranslations.FirstOrDefault(t => t.SurahNo == surah && t.AyahNo == ayah);
+                if (existingTranslation == null)
                 {
-                    AyahNo = ayah,
-                    SurahNo = surah,
-                    Heading = heading,
-                    Translation = myTranslation,
-                    Footnote = footnote,
-                    NewParaAfterThis = newPara,
-                    CreatedDate = DateTime.Now,
-                    LastUpdateDate = DateTime.Now
-                };
+                    var newTranslation = new MyTranslation
+                    {
+                        AyahNo = ayah,
+                        SurahNo = surah,
+                        Heading = heading,
+                        Translation = myTranslation,
+                        Footnote = footnote,
+                        NewParaAfterThis = newPara,
+                        CreatedDate = DateTime.Now,
+                        LastUpdateDate = DateTime.Now
+                    };
 
-                _Quran.MyTranslations.Add(newTranslation);
-                _Quran.SaveChanges();
-            }
-            else
-            {
-                existingTranslation.NewParaAfterThis = newPara;
-                existingTranslation.SurahNo = surah;
-                existingTranslation.AyahNo = ayah;
-                existingTranslation.Heading = heading;
-                existingTranslation.Translation = myTranslation;
-                existingTranslation.Footnote = footnote;
-                existingTranslation.LastUpdateDate = DateTime.Now;
-                
-                _Quran.SaveChanges();
+                    quran.MyTranslations.Add(newTranslation);
+                    quran.SaveChanges();
+                }
+                else
+                {
+                    existingTranslation.NewParaAfterThis = newPara;
+                    existingTranslation.SurahNo = surah;
+                    existingTranslation.AyahNo = ayah;
+                    existingTranslation.Heading = heading;
+                    existingTranslation.Translation = myTranslation;
+                    existingTranslation.Footnote = footnote;
+                    existingTranslation.LastUpdateDate = DateTime.Now;
+
+                    quran.SaveChanges();
+                }
             }
         }
 
@@ -570,11 +582,5 @@ namespace QuranWeb
         //    }
         //}
 
-        public override void Dispose()
-        {
-            base.Dispose();
-            
-            _Quran.Dispose();
-        }
     }
 }

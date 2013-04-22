@@ -661,11 +661,10 @@
 <script type="text/javascript" src="http://api.yamli.com/js/yamli_api.js"></script>
 <script type="text/javascript">
     if (!minimal) {
-        jQuery(document).ready(function() {
-            if (typeof (Yamli) == "object" && Yamli.init({ uiLanguage: "en", startMode: "onOrUserDefault" })) {
-                Yamli.yamlify("search", { settingsPlacement: "bottomLeft" });
-            }
-        });
+        if (typeof(Yamli) == "object" && Yamli.init( { uiLanguage: "en" , startMode: "onOrUserDefault" } ))
+        {
+            Yamli.yamlify( "search", { settingsPlacement: "bottomLeft" } );
+        }
     }
 </script>
 <!-- YAMLI CODE END -->
