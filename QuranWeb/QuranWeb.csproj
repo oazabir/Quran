@@ -80,7 +80,6 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="alquanu.png" />
     <Content Include="Corpus.aspx" />
     <Content Include="corpus.css" />
     <Content Include="Default.aspx" />

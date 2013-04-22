@@ -646,12 +646,12 @@
             jQuery(document).ready(function(){
 
                 $('#jsqari-ui-surah-selector').val(surah);
-                $('#jsqari-ui-ayah-selector').val(ayah);
-
+                
                 jsQari = new JSQari();
                 jsQari.init();
 
-                
+                jsQari.handleSurahChange();
+                $('#jsqari-ui-ayah-selector').val(ayah);
             });
         }
 
