@@ -112,15 +112,6 @@ namespace QuranWeb {
         protected global::System.Web.UI.WebControls.HyperLink NextAyah;
         
         /// <summary>
-        /// ddlLanguageFilter control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLanguageFilter;
-        
-        /// <summary>
         /// WordByWordContainer control.
         /// </summary>
         /// <remarks>
@@ -137,6 +128,15 @@ namespace QuranWeb {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label AyahLabel;
+        
+        /// <summary>
+        /// ddlLanguageFilter control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlLanguageFilter;
         
         /// <summary>
         /// pnlRelevantVerses control.

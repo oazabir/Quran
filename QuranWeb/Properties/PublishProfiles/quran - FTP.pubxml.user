@@ -1,0 +1,375 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!--
+This file is used by the publish/package process of your Web project. You can customize the behavior of this process
+by editing this MSBuild file. In order to learn more about this please visit http://go.microsoft.com/fwlink/?LinkID=208121. 
+-->
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <LastUsedBuildConfiguration>Release</LastUsedBuildConfiguration>
+    <LastUsedPlatform>Any CPU</LastUsedPlatform>
+    <TimeStampOfAssociatedLegacyPublishXmlFile />
+    <EncryptedPassword>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAAXO7q++jg2EKNiJywI24eRgAAAAACAAAAAAAQZgAAAAEAACAAAAD3dSOvhmxdWgEaIpQbytGEsFQj7d+3q5EV6oSA3jHQMQAAAAAOgAAAAAIAACAAAABeTEQh3EnIzTtsampjO+TzeltHIxB3VDKVuMOYqBQs8yAAAAD2PYxfebB/x2ANTS8RGmaRbwNAzNw3wkIiD7Rr94Vm80AAAABI3eeZ+TThjOKloPos7kI1c5Wzbc1XIC/4AZZg9Q+JKKIbJxDb2IOdlNPDjQGWhcIOh/kGRRKpDspiiQN0WXVq</EncryptedPassword>
+  </PropertyGroup>
+  <ItemGroup>
+    <File Include="alquanu.png">
+      <publishTime>04/06/2013 15:02:34</publishTime>
+    </File>
+    <File Include="App_Browsers/Form.browser">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="App_Code/FormRewriterControlAdapter.cs">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="App_Code/RemoveETag.cs">
+      <publishTime>02/04/2013 17:43:30</publishTime>
+    </File>
+    <File Include="App_Data/Template.docx">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="bin/DocumentFormat.OpenXml.dll">
+      <publishTime>02/22/2010 15:33:08</publishTime>
+    </File>
+    <File Include="bin/EntityFramework.dll">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="bin/HtmlAgilityPack.dll">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="bin/Intelligencia.UrlRewriter.dll">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="bin/MiniProfiler.dll">
+      <publishTime>01/12/2014 17:02:05</publishTime>
+    </File>
+    <File Include="bin/MiniProfiler.EntityFramework.dll">
+      <publishTime>01/12/2014 17:07:07</publishTime>
+    </File>
+    <File Include="bin/QuranObjects.dll">
+      <publishTime>01/05/2014 12:56:27</publishTime>
+    </File>
+    <File Include="bin/QuranWeb.dll">
+      <publishTime>01/13/2014 23:41:43</publishTime>
+    </File>
+    <File Include="Corpus.aspx">
+      <publishTime>01/12/2014 13:15:11</publishTime>
+    </File>
+    <File Include="corpus.css">
+      <publishTime>01/13/2014 22:57:45</publishTime>
+    </File>
+    <File Include="Default.aspx">
+      <publishTime>01/16/2014 11:38:31</publishTime>
+    </File>
+    <File Include="fancybox/blank.gif">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancybox-x.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancybox-y.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancybox.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_close.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_loading.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_nav_left.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_nav_right.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_e.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_n.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_ne.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_nw.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_s.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_se.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_sw.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_shadow_w.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_title_left.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_title_main.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_title_over.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/fancy_title_right.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/jquery.easing-1.3.pack.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/jquery.fancybox-1.3.4.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/jquery.fancybox-1.3.4.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/jquery.fancybox-1.3.4.pack.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="fancybox/jquery.mousewheel-3.0.4.pack.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="favicon.ico">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="GenerateWord.ashx">
+      <publishTime>12/05/2012 23:22:33</publishTime>
+    </File>
+    <File Include="Global.asax">
+      <publishTime>01/12/2014 17:03:21</publishTime>
+    </File>
+    <File Include="jHtmlArea/AutoPostTest.aspx">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/AutoPostTest.aspx.vb">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/ColorPickerMenu.htm">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/Default.htm">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/images/disk.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/Readme.txt">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea-0.7.0-vsdoc.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea-0.7.0.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea-0.7.0.min-vsdoc.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea-0.7.0.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea.ColorPickerMenu-0.7.0.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jHtmlArea.ColorPickerMenu-0.7.0.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jquery-1.3.2-vsdoc.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jquery-1.3.2.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jquery-1.3.2.min-vsdoc.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jquery-1.3.2.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/scripts/jquery-ui-1.7.2.custom.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea.ColorPickerMenu.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea.Editor.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea_Toolbar_Group_BG.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jHtmlArea_Toolbar_Group__Btn_Select_BG.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_diagonals-thick_18_b81900_40x40.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_diagonals-thick_20_666666_40x40.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_flat_10_000000_40x100.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_glass_100_f6f6f6_1x400.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_glass_100_fdf5ce_1x400.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_glass_65_ffffff_1x400.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_gloss-wave_35_f6a828_500x100.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_highlight-soft_100_eeeeee_1x100.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-bg_highlight-soft_75_ffe45c_1x100.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-icons_222222_256x240.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-icons_228ef1_256x240.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-icons_ef8c08_256x240.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-icons_ffd27a_256x240.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/images/ui-icons_ffffff_256x240.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="jHtmlArea/style/jqueryui/ui-lightness/jquery-ui-1.7.2.custom.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="MyTranslationReader.aspx">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="packages.config">
+      <publishTime>01/12/2014 17:07:08</publishTime>
+    </File>
+    <File Include="quran.azurewebsites.net.PublishSettings">
+      <publishTime>04/22/2013 21:20:39</publishTime>
+    </File>
+    <File Include="Rss.ashx">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/css/basic.css">
+      <publishTime>04/06/2013 19:24:46</publishTime>
+    </File>
+    <File Include="scripts/basic/css/basic_ie.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/css/demo.css">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/img/basic/x.png">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/index.html">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/js/basic.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/js/jquery.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/basic/js/jquery.simplemodal.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/Dictionary.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/jquery-1.4.3.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/jquery.htmlClean-min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/jquery.searchabledropdown-1.0.8.min.js">
+      <publishTime>12/05/2012 22:03:17</publishTime>
+    </File>
+    <File Include="scripts/jsqari/Jplayer.swf">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/jquery.jplayer.min.js">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/jsqari.js">
+      <publishTime>01/13/2014 23:47:46</publishTime>
+    </File>
+    <File Include="scripts/jsqari/skin/jplayer.blue.monday.video.play.hover.png">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/skin/jplayer.blue.monday.video.play.png">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/skin/jsqari.skin.css">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/skin/jsqari.skin.jpg">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/jsqari/skin/pbar-ani.gif">
+      <publishTime>01/13/2014 23:10:23</publishTime>
+    </File>
+    <File Include="scripts/qTip/jquery.qtip-1.0.0-rc3.min.js">
+      <publishTime>12/05/2012 20:15:09</publishTime>
+    </File>
+    <File Include="scripts/uframe/aa-ha-index.js">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="scripts/uframe/aa-hw-index.js">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="scripts/uframe/aa-ll-index.js">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="scripts/uframe/htmlparser.js">
+      <publishTime>12/05/2012 20:15:10</publishTime>
+    </File>
+    <File Include="scripts/uframe/UFrame.js">
+      <publishTime>01/06/2014 16:06:36</publishTime>
+    </File>
+    <File Include="Search.aspx">
+      <publishTime>01/12/2014 16:36:05</publishTime>
+    </File>
+    <File Include="Settings.aspx">
+      <publishTime>04/06/2013 14:23:05</publishTime>
+    </File>
+    <File Include="style.css">
+      <publishTime>01/16/2014 11:35:21</publishTime>
+    </File>
+    <File Include="Test.aspx">
+      <publishTime>04/07/2013 11:38:35</publishTime>
+    </File>
+    <File Include="TopicAyahs.aspx">
+      <publishTime>12/05/2012 22:59:50</publishTime>
+    </File>
+    <File Include="TopicIndex.html">
+      <publishTime>12/05/2012 22:59:50</publishTime>
+    </File>
+    <File Include="Web.config">
+      <publishTime>04/14/2013 20:34:15</publishTime>
+    </File>
+    <File Include="WordDetails.aspx">
+      <publishTime>04/07/2013 12:14:17</publishTime>
+    </File>
+  </ItemGroup>
+</Project>

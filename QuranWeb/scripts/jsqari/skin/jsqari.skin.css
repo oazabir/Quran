@@ -69,6 +69,11 @@ form.jsqari-interface ul li.single label {
 	width: 90px;
 }
 
+form.jsqari-interface ul li.single output {
+	width: 300px;
+	font-size:95%;
+}
+
 form.jsqari-interface li span label
 {
 	border:none;
