@@ -253,14 +253,14 @@ License:
         $("a", container)
         .unbind("click")
         .click(function () {
-            var href = $(this).attr("href");
+            var href = $(this).attr("href") || "";
             if (href) {
                 // if href is an absolute URL to outside domain, leave it
                 if (href.indexOf("http://") >= 0 && href.indexOf(document.location.host) < 0) {
                     return true;
                 }
                 else {
-                    if (href.indexOf('javascript:') !== 0) {
+                    if (href !== "#" && href.indexOf('javascript:') >= 0) {
                         UFrameManager.loadHtml(href, null, config);
                         return false;
                     }

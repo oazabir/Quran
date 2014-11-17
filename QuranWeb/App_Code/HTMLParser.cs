@@ -68,8 +68,10 @@ namespace QuranWeb
                     var thirdCol = tds.Count > 2 ? tds[2].InnerHtml.Trim() : string.Empty;
 
                     var html = "<div class=\"wordbyword\">" //"<div class=\"" + (rightToLeft ? "alignright" : "alignleft") + " wordbyword\">"
-                        + "<div class=\"transliteration\">" + tokens[1] + "</div>"                        
-                        + tds[1].InnerHtml.Replace("href=\"", "href=\"http://corpus.quran.com")
+                        //+ "<div class=\"transliteration\">" + tokens[1] + "</div>"                        
+                        + "<div class=\"wordimage\">"
+                        + CleanImage(tds[1].InnerHtml)//.Replace("href=\"", "href=\"http://corpus.quran.com")
+                        + "</div>"
                         + "<div class=\"grammar\">" + thirdCol + "</div>"
                         + "<div class=\"meaning\">" + tokens[2] + "</div>"
                         + "</div>";
@@ -93,6 +95,13 @@ namespace QuranWeb
 
 
             return buffer.ToString();
+        }
+
+        private static Regex _CleanHyperlink = new Regex("</{0,1}a[^>]*>", RegexOptions.Compiled);
+        private static string CleanImage(string html)
+        {
+            return html;
+            return _CleanHyperlink.Replace(html, "");
         }
     }
 }

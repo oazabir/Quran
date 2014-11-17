@@ -17,12 +17,20 @@ namespace QuranWeb
             //   criteria = criteria + ' ';
             var arabic = Convert.ToBoolean(Request["arabic"]);
             var translationID = arabic ? 45 : 7;
-            var searchTranslationIDs = new int[] { 6, 12, 45, 50, 5 };
+            var searchTranslationIDs = new int[] { 
+                50, /*Arabic clean*/
+                7, /*Arabic Uthmani*/
+                6, /*Sahih International*/
+                45, /*Abdel Haleem*/
+                
+            };
 
             using (var quran = new QuranContext())
             {
                 var verse = from a in quran.Ayahs
-                            where searchTranslationIDs.Contains(a.TranslatorID) && a.Content.Contains(criteria)
+                            where 
+                            searchTranslationIDs.Contains(a.TranslatorID) 
+                            && a.Content.Contains(criteria)
                             group a by new { a.SurahNo, a.AyahNo } into anAyah
                             select new  
                             {

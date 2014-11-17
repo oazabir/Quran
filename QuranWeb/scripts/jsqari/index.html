@@ -1,0 +1,454 @@
+<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>
+<html xmlns='http://www.w3.org/1999/xhtml' lang='en' xml:lang='en'>
+<head>
+
+	<title>jsQari - A JavaScript Quran Recitation Player</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+
+	<style>
+		body,td,input,select,textarea{
+			font-family:Arial,Helvetica,sans-serif;
+			font-size:10pt;
+		}
+	</style>
+
+	<link href="jsqari/skin/jsqari.skin.css" rel="stylesheet" type="text/css" />
+
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+	<script type="text/javascript" src="jsqari/jquery.jplayer.min.js"></script>
+	<script type="text/javascript" src="jsqari/jsqari.js"></script>
+	<script type="text/javascript">
+
+	var jsQari;
+
+	$(document).ready(function(){
+
+		jsQari = new JSQari();
+		jsQari.init();
+
+	});
+
+	</script>
+
+</head>
+<body>
+
+	<h1>jsQari - A JavaScript Quran Recitation Player</h1>
+
+	<p>jsQari is an Open Source JavaScript based Quran Recitation player that was developed to be used for the Quran recitation feature of <a href="http://www.qurantracker.com/">QuranTracker.com</a>. It is a stand-alone Quran Recitation player that can  be used on any website/application. It uses the Open Source <a href="http://www.jplayer.org/">jPlayer Media Player</a> for playing the Quran ayahs in MP3 which are provided by <a href="http://www.versebyversequran.com/">Verse by Verse Quran</a>. jsQari can be used stand-alone or integrated with a website/application using the simple API. Currently jsQari is thin on documentation. Just download the code and have a look at the source for index.html.</p>
+
+	<h2>jsQari Player</h2>
+	<form class="jsqari-interface">
+		<ul>
+			<li class="single">
+			From:</li>
+			<li>
+				<span>
+					<select id="jsqari-ui-surah-from-selector" class="medium">
+						<option value="1">1. Al-Faatiha</option>
+						<option value="2">2. Al-Baqarah</option>
+						<option value="3">3. Aale 'Imran</option>
+						<option value="4">4. An-Nisaa</option>
+						<option value="5">5. Al-Maaidah</option>
+						<option value="6">6. Al-An'aam</option>
+						<option value="7">7. Al-A'raaf</option>
+						<option value="8">8. Al-Anfaal</option>
+						<option value="9">9. At-Tawbah</option>
+						<option value="10">10. Younus</option>
+						<option value="11">11. Huud</option>
+						<option value="12">12. Yusuf</option>
+						<option value="13">13. Ar-Ra'ad</option>
+						<option value="14">14. Ibraheem</option>
+						<option value="15">15. Al-Hijr</option>
+						<option value="16">16. An-Nahl</option>
+						<option value="17">17. Al-Israa</option>
+						<option value="18">18. Al-Kahf</option>
+						<option value="19">19. Maryam</option>
+						<option value="20">20. Taha</option>
+						<option value="21">21. Al-Anbiya</option>
+						<option value="22">22. Al-Hajj</option>
+						<option value="23">23. Al-Muminoon</option>
+						<option value="24">24. An-Noor</option>
+						<option value="25">25. Al-Furqaan</option>
+						<option value="26">26. Ash-Shu'araa</option>
+						<option value="27">27. An-Naml</option>
+						<option value="28">28. Al-Qasas</option>
+						<option value="29">29. Al-'Ankaboot</option>
+						<option value="30">30. Ar-Ruum</option>
+						<option value="31">31. Luqmaan</option>
+						<option value="32">32. As-Sajdah</option>
+						<option value="33">33. Al-Ahzaab</option>
+						<option value="34">34. Saba</option>
+						<option value="35">35. Faatir</option>
+						<option value="36">36. Yaseen</option>
+						<option value="37">37. As-Saffat</option>
+						<option value="38">38. Saad</option>
+						<option value="39">39. Az-Zumar</option>
+						<option value="40">40. Ghafir</option>
+						<option value="41">41. Fussilat</option>
+						<option value="42">42. Ash-Shura</option>
+						<option value="43">43. Az-Zukhruf</option>
+						<option value="44">44. Ad-Dukhan</option>
+						<option value="45">45. Al-Jathiya</option>
+						<option value="46">46. Al-Ahqaf</option>
+						<option value="47">47. Muhammad</option>
+						<option value="48">48. Al-Fath</option>
+						<option value="49">49. Al-Hujuraat</option>
+						<option value="50">50. Qaf</option>
+						<option value="51">51. Adh-Dhariyat</option>
+						<option value="52">52. At-Tur</option>
+						<option value="53">53. An-Najm</option>
+						<option value="54">54. Al-Qamar</option>
+						<option value="55">55. Ar-Rahman</option>
+						<option value="56">56. Al-Waqia</option>
+						<option value="57">57. Al-Hadid</option>
+						<option value="58">58. Al-Mujadila</option>
+						<option value="59">59. Al-Hashr</option>
+						<option value="60">60. Al-Mumtahina</option>
+						<option value="61">61. As-Saff</option>
+						<option value="62">62. Al-Jumua</option>
+						<option value="63">63. Al-Munafiqoon</option>
+						<option value="64">64. At-Taghabun</option>
+						<option value="65">65. At-Talaq</option>
+						<option value="66">66. At-Tahrim</option>
+						<option value="67">67. Al-Mulk</option>
+						<option value="68">68. Al-Qalam</option>
+						<option value="69">69. Al-Haaqqah</option>
+						<option value="70">70. Al-Ma'arij</option>
+						<option value="71">71. Nooh</option>
+						<option value="72">72. Al-Jinn</option>
+						<option value="73">73. Al-Muzzammil</option>
+						<option value="74">74. Al-Muddaththir</option>
+						<option value="75">75. Al-Qiyamah</option>
+						<option value="76">76. Al-Insaan</option>
+						<option value="77">77. Al-Mursalat</option>
+						<option value="78">78. An-Naba</option>
+						<option value="79">79. An-Naziat</option>
+						<option value="80">80. Abasa</option>
+						<option value="81">81. At-Takwir</option>
+						<option value="82">82. Al-Infitar</option>
+						<option value="83">83. Al-Mutaffifin</option>
+						<option value="84">84. Al-Inshiqaaq</option>
+						<option value="85">85. Al-Burooj</option>
+						<option value="86">86. At-Tariq</option>
+						<option value="87">87. Al-A'la</option>
+						<option value="88">88. Al-Ghashiyah</option>
+						<option value="89">89. Al-Fajr</option>
+						<option value="90">90. Al-Balad</option>
+						<option value="91">91. Ash-Shams</option>
+						<option value="92">92. Al-Lail</option>
+						<option value="93">93. Ad-Duha</option>
+						<option value="94">94. Ash-Sharh</option>
+						<option value="95">95. At-Tin</option>
+						<option value="96">96. Al-'Alaq</option>
+						<option value="97">97. Al-Qadr</option>
+						<option value="98">98. Al-Bayyinah</option>
+						<option value="99">99. Az-Zalzalah</option>
+						<option value="100">100. Al-'Adiyat</option>
+						<option value="101">101. Al-Qariyah</option>
+						<option value="102">102. At-Takathur</option>
+						<option value="103">103. Al-'Asr</option>
+						<option value="104">104. Al-Humazah</option>
+						<option value="105">105. Al-Fil</option>
+						<option value="106">106. Quraysh</option>
+						<option value="107">107. Al-Maoun</option>
+						<option value="108">108. Al-Kawthar</option>
+						<option value="109">109. Al-Kafiroon</option>
+						<option value="110">110. An-Nasr</option>
+						<option value="111">111. Al-Masad</option>
+						<option value="112">112. Al-Ikhlaas</option>
+						<option value="113">113. Al-Falaq</option>
+						<option value="114">114. An-Naas</option>
+					</select>
+				</span>
+
+				<span>
+					<select id="jsqari-ui-ayah-from-selector" class="small">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</span>
+
+			</li>
+			<li class="single">
+			To:</li>
+			<li>
+				<span>
+					<select id="jsqari-ui-surah-to-selector" class="medium">
+						<option value="1">1. Al-Faatiha</option>
+						<option value="2">2. Al-Baqarah</option>
+						<option value="3">3. Aale 'Imran</option>
+						<option value="4">4. An-Nisaa</option>
+						<option value="5">5. Al-Maaidah</option>
+						<option value="6">6. Al-An'aam</option>
+						<option value="7">7. Al-A'raaf</option>
+						<option value="8">8. Al-Anfaal</option>
+						<option value="9">9. At-Tawbah</option>
+						<option value="10">10. Younus</option>
+						<option value="11">11. Huud</option>
+						<option value="12">12. Yusuf</option>
+						<option value="13">13. Ar-Ra'ad</option>
+						<option value="14">14. Ibraheem</option>
+						<option value="15">15. Al-Hijr</option>
+						<option value="16">16. An-Nahl</option>
+						<option value="17">17. Al-Israa</option>
+						<option value="18">18. Al-Kahf</option>
+						<option value="19">19. Maryam</option>
+						<option value="20">20. Taha</option>
+						<option value="21">21. Al-Anbiya</option>
+						<option value="22">22. Al-Hajj</option>
+						<option value="23">23. Al-Muminoon</option>
+						<option value="24">24. An-Noor</option>
+						<option value="25">25. Al-Furqaan</option>
+						<option value="26">26. Ash-Shu'araa</option>
+						<option value="27">27. An-Naml</option>
+						<option value="28">28. Al-Qasas</option>
+						<option value="29">29. Al-'Ankaboot</option>
+						<option value="30">30. Ar-Ruum</option>
+						<option value="31">31. Luqmaan</option>
+						<option value="32">32. As-Sajdah</option>
+						<option value="33">33. Al-Ahzaab</option>
+						<option value="34">34. Saba</option>
+						<option value="35">35. Faatir</option>
+						<option value="36">36. Yaseen</option>
+						<option value="37">37. As-Saffat</option>
+						<option value="38">38. Saad</option>
+						<option value="39">39. Az-Zumar</option>
+						<option value="40">40. Ghafir</option>
+						<option value="41">41. Fussilat</option>
+						<option value="42">42. Ash-Shura</option>
+						<option value="43">43. Az-Zukhruf</option>
+						<option value="44">44. Ad-Dukhan</option>
+						<option value="45">45. Al-Jathiya</option>
+						<option value="46">46. Al-Ahqaf</option>
+						<option value="47">47. Muhammad</option>
+						<option value="48">48. Al-Fath</option>
+						<option value="49">49. Al-Hujuraat</option>
+						<option value="50">50. Qaf</option>
+						<option value="51">51. Adh-Dhariyat</option>
+						<option value="52">52. At-Tur</option>
+						<option value="53">53. An-Najm</option>
+						<option value="54">54. Al-Qamar</option>
+						<option value="55">55. Ar-Rahman</option>
+						<option value="56">56. Al-Waqia</option>
+						<option value="57">57. Al-Hadid</option>
+						<option value="58">58. Al-Mujadila</option>
+						<option value="59">59. Al-Hashr</option>
+						<option value="60">60. Al-Mumtahina</option>
+						<option value="61">61. As-Saff</option>
+						<option value="62">62. Al-Jumua</option>
+						<option value="63">63. Al-Munafiqoon</option>
+						<option value="64">64. At-Taghabun</option>
+						<option value="65">65. At-Talaq</option>
+						<option value="66">66. At-Tahrim</option>
+						<option value="67">67. Al-Mulk</option>
+						<option value="68">68. Al-Qalam</option>
+						<option value="69">69. Al-Haaqqah</option>
+						<option value="70">70. Al-Ma'arij</option>
+						<option value="71">71. Nooh</option>
+						<option value="72">72. Al-Jinn</option>
+						<option value="73">73. Al-Muzzammil</option>
+						<option value="74">74. Al-Muddaththir</option>
+						<option value="75">75. Al-Qiyamah</option>
+						<option value="76">76. Al-Insaan</option>
+						<option value="77">77. Al-Mursalat</option>
+						<option value="78">78. An-Naba</option>
+						<option value="79">79. An-Naziat</option>
+						<option value="80">80. Abasa</option>
+						<option value="81">81. At-Takwir</option>
+						<option value="82">82. Al-Infitar</option>
+						<option value="83">83. Al-Mutaffifin</option>
+						<option value="84">84. Al-Inshiqaaq</option>
+						<option value="85">85. Al-Burooj</option>
+						<option value="86">86. At-Tariq</option>
+						<option value="87">87. Al-A'la</option>
+						<option value="88">88. Al-Ghashiyah</option>
+						<option value="89">89. Al-Fajr</option>
+						<option value="90">90. Al-Balad</option>
+						<option value="91">91. Ash-Shams</option>
+						<option value="92">92. Al-Lail</option>
+						<option value="93">93. Ad-Duha</option>
+						<option value="94">94. Ash-Sharh</option>
+						<option value="95">95. At-Tin</option>
+						<option value="96">96. Al-'Alaq</option>
+						<option value="97">97. Al-Qadr</option>
+						<option value="98">98. Al-Bayyinah</option>
+						<option value="99">99. Az-Zalzalah</option>
+						<option value="100">100. Al-'Adiyat</option>
+						<option value="101">101. Al-Qariyah</option>
+						<option value="102">102. At-Takathur</option>
+						<option value="103">103. Al-'Asr</option>
+						<option value="104">104. Al-Humazah</option>
+						<option value="105">105. Al-Fil</option>
+						<option value="106">106. Quraysh</option>
+						<option value="107">107. Al-Maoun</option>
+						<option value="108">108. Al-Kawthar</option>
+						<option value="109">109. Al-Kafiroon</option>
+						<option value="110">110. An-Nasr</option>
+						<option value="111">111. Al-Masad</option>
+						<option value="112">112. Al-Ikhlaas</option>
+						<option value="113">113. Al-Falaq</option>
+						<option value="114">114. An-Naas</option>
+					</select>
+				</span>
+
+				<span>
+					<select id="jsqari-ui-ayah-to-selector" class="small">
+						<option value="1">1</option>
+						<option value="2">2</option>
+						<option value="3">3</option>
+						<option value="4">4</option>
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+					</select>
+				</span>
+
+			</li>
+
+			<li class="single">
+
+
+				<label for="jsqari-ui-repeat-ayah-selector">Repeat Ayah</label>
+				<select id="jsqari-ui-repeat-ayah-selector" class="medium">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="5">5</option>
+					<option value="10">10</option>
+				</select>
+
+
+			</li>
+			<li class="single">
+
+
+				<label for="jsqari-ui-repeat-section-selector">Repeat Section</label>
+				<select id="jsqari-ui-repeat-section-selector" class="medium">
+					<option value="1">1</option>
+					<option value="2">2</option>
+					<option value="3">3</option>
+					<option value="5">5</option>
+					<option value="10">10</option>
+					<option value="Infinite">Infinite</option>
+				</select>
+
+
+			</li>
+			
+			<li class="single">
+
+				<label for="jsqari-ui-reciter-selector">Reciter</label>
+				<select id="jsqari-ui-reciter-selector" class="medium">
+					<option value="Alafasy_64kbps/">Al-Afasy</option>
+					<option value="Ahmed_ibn_Ali_al-Ajamy_64kbps_QuranExplorer.Com/">Al-Ajamy</option>
+					<option value="Salaah_AbdulRahman_Bukhatir_128kbps/">Bukhatir</option>
+					<option value="Ghamadi_40kbps/">Ghamadi</option>
+					<option value="Hudhaify_64kbps/">Hudhaify</option>
+					<option value="Husary_64kbps/">Husary</option>
+					<option value="Menshawi_16kbps/">Minshawy</option>
+					<option value="Maher_AlMuaiqly_64kbps/">Muaiqly</option>
+					<option value="Abu_Bakr_Ash-Shaatree_64kbps/">Shaatri</option>
+					<option value="Saood_ash-Shuraym_64kbps/">Shuraym</option>
+					<option value="Abdurrahmaan_As-Sudais_64kbps/">Sudais</option>
+				</select>
+
+			</li>
+			
+			<li class="single">
+				<label for="jsqari-ui-current-playing">Current</label>
+				<output id="jsqari-ui-current-playing">Waiting</output>
+				
+
+			</li>
+
+
+
+		</ul>
+	</form>
+
+	<div id="jquery_jplayer_1" class="jp-jplayer"></div>
+
+	<div class="jp-audio" style="width: 275px">
+		<div class="jp-type-single">
+			<div id="jp_interface_1" class="jp-interface">
+				<ul class="jp-controls">
+					<li><a href="#" class="jp-play" tabindex="1">play</a></li>
+					<li><a href="#" class="jp-pause" tabindex="1">pause</a></li>
+					<li><a href="#" class="jp-stop" tabindex="1">stop</a></li>
+					<li><a href="#" class="jp-mute" tabindex="1">mute</a></li>
+					<li><a href="#" class="jp-unmute" tabindex="1">unmute</a></li>
+				</ul>
+				<div class="jp-progress">
+					<div class="jp-seek-bar">
+						<div class="jp-play-bar"></div>
+					</div>
+				</div>
+				<div class="jp-volume-bar">
+					<div class="jp-volume-bar-value"></div>
+				</div>
+				<div class="jp-current-time"></div>
+				<div class="jp-duration"></div>
+			</div>
+			<!--
+			<div id="jp_playlist_1" class="jp-playlist">
+				<ul>
+					<li>Al-Quran</li>
+				</ul>
+			</div>
+			-->
+		</div>
+	</div>
+	<span class="poweredby">Powered by <a href="http://code.google.com/p/jsqari/">jsQari</a></span>
+
+	<h2>Using API</h2>
+	Surah: <input type="text" size="3" id="surahNumber" />
+	Ayah: <input type="text" size="3" id="ayahNumber" />
+	<input type="submit" value="Play Surah" onClick="jsQari.playSurah($('#surahNumber').val());"/>
+	<input type="submit" value="Play Surah/Ayah" onClick="jsQari.playSurahAyah($('#surahNumber').val(), $('#ayahNumber').val(),false);"/>
+	<br/>
+	From :
+	<br/>
+	Surah: <input type="text" size="3" id="surahNumberFrom" />
+	Ayah: <input type="text" size="3" id="ayahNumberFrom" />
+	<br/>
+	To :
+	<br/>
+	Surah: <input type="text" size="3" id="surahNumberTo" />
+	Ayah: <input type="text" size="3" id="ayahNumberTo" />
+	<br/>
+	<input type="submit" value="Set From Position" onClick="jsQari.setFromPosition($('#surahNumberFrom').val(), $('#ayahNumberFrom').val());"/>
+	<input type="submit" value="Set To Position" onClick="jsQari.setToPosition($('#surahNumberTo').val(), $('#ayahNumberTo').val());"/>
+	<input type="submit" value="Set From To Position" onClick="jsQari.setFromToPosition($('#surahNumberFrom').val(), $('#ayahNumberFrom').val(),$('#surahNumberTo').val(), $('#ayahNumberTo').val());"/>
+	<input type="submit" value="Play" onClick="jsQari.play();"/>
+	<input type="submit" value="Play Section" onClick="jsQari.playSection($('#surahNumberFrom').val(), $('#ayahNumberFrom').val(),$('#surahNumberTo').val(), $('#ayahNumberTo').val());"/>
+	<input type="submit" value="Stop" onClick="jsQari.stop();"/>
+	<br/>
+	<input type="text" size="3" id="repeatAyahNumber" />
+	<input type="submit" value="Set Repeat Ayah" onClick="jsQari.setRepeatAyah($('#repeatAyahNumber').val());"/>
+	<br/>
+	<input type="text" size="3" id="repeatSectionNumber" />
+	<input type="submit" value="Set Repeat Section" onClick="jsQari.setRepeatSection($('#repeatSectionNumber').val());"/>
+	<br/>
+	
+	<select id="jsqari-ui-mode-selector" class="medium">
+		<option value="continious">Continious</option>
+		<option value="surah">Surah</option>
+		<option value="repeatsurah">Repeat Surah</option>
+		<option value="singleayah">Single Ayah</option>
+		<option value="repeatayah">Repeat Ayah</option>
+	</select>
+	<input type="submit" value="Set Play Mode" onClick="jsQari.setPlayMode($('#jsqari-ui-mode-selector').val());"/>
+	<h2>Credits</h2>
+	
+	Author: Apu Ziad Mannan (<a href="http://www.qurantracker.com/">QuranTracker</a>)<br />
+	Quran MP3s: <a href="http://www.versebyversequran.com/">Verse by Verse Quran</a><br />
+	Media Player: <a href="http://www.jplayer.org/">jPlayer</a>
+
+</body>
+</html>

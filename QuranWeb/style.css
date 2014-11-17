@@ -4,7 +4,7 @@
 }
 
 body {
-    /*background-color: #d8d8d8;*/
+    /*background-color: #d8dstye8d8;*/
     font-family: Georgia;
     /*display: none;*/
 }
@@ -25,7 +25,7 @@ body {
   z-index:100; */
     width: 100%;
     background: #FAFAFA;
-    height: 80px;
+    height: 100px;
     border: 1px solid #F0F0F0;
 }
 
@@ -39,6 +39,7 @@ body {
 
 #WordByWordContainer {
     clear: both;
+    margin-right: 100px;
 } 
 
 #container {
@@ -206,11 +207,14 @@ footer {
 }
 
 #pnlOriginal > p {
-    font-size: 36pt;
-    line-height: 40px;
+    font-size: 37pt;
+    line-height: 1.2em;
     font-family: 'Arabic Typesetting';
-    font-smooth: always;
+    word-spacing: 2px;
+    color: #505050;
     margin-top: 20px;
+    -webkit-font-smoothing: antialiased !important;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.004);
 }
 
 .wordbyword_tip {
@@ -302,6 +306,7 @@ footer {
 }
 
 #relevant_topics {
+    clear:both;
     float: right;
     width: 200px;
     margin-left: 50px;
@@ -332,4 +337,37 @@ footer {
 .source {
     font-size: small;
     
+}
+
+#player {
+    position: fixed;
+    right: 0px;
+    top: 0px;
+    padding: 10px;
+    background-color: #fafafa;             
+    width: 275px;
+    clear: both;
+    /*font-size: 60%;*/
+    zoom: 0.6; 
+    border-bottom: 1px solid #F0F0F0;
+}
+#player ul {
+    list-style:none;
+}
+    
+
+#menu {
+    float: right;
+    margin-left: 50px;
+    background-color: #fafafa;
+    padding: 5px;
+    width: 200px;
+}
+
+#search {
+    width: 100px;
+}
+
+.display_none {
+    display: none;
 }

@@ -3,7 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
     <title>Corpus - Word by Word translation</title>
-    <link rel="stylesheet" media="screen" href="/corpus.css?v=2" />
+    <link rel="stylesheet" media="screen" href="/corpus.css?v=5" />
     <script src="/scripts/jquery-1.4.3.min.js" type="text/javascript"></script>
     <script type='text/javascript' src='/scripts/basic/js/jquery.simplemodal.js'></script>
     <script src="/scripts/qTip/jquery.qtip-1.0.0-rc3.min.js" type="text/javascript"></script>
@@ -12,21 +12,10 @@
     </style>    
     <script type="text/javascript">
         $(document).ready(function () {
-            //                $(".wordbyword img").each(function () {
-            //                    var e = $(this);
-            //                    $(this).mouseover(function () {
-            //                        var parent = $(this).parents(".wordbyword");
-            //                        parent.css({ "height": "auto" });
-            //                        parent.find('.grammar').show('slow');
-            //                    });
-            //                    $(this).mouseout(function () {
-            //                        var parent = $(this).parents(".wordbyword");
-            //                        parent.css({ "height": "160px" });
-            //                        parent.find('.grammar').hide('slow');
-            //                    });
-            //                });
+            
             $(".wordbyword").each(function (i, r) {
-                $(this).qtip({
+                
+                $(r).qtip({
                     content: $(this).find(".grammar").html(),
                     position: {
                         corner: {
@@ -36,37 +25,29 @@
                     }
                 });
 
-                //                    $(this).mouseenter(function () {
-                //                        var width = $(this).width();
-                //                        $(this).width(width);
+                $("a", r).each(function(i, e){
+                    $(r).attr("href", $(e).attr("href"));
+                    $(e).attr("href_org", $(e).attr("href"))
+                        .attr("href", "#");                    
+                });
 
-                //                        //                        var pos = $(this).position();
-                //                        //                        $(this).css({ "height": "auto", "position": "absolute", "top": pos.top + "px", "left": pos.left + "px" });
-
-                //                        //$(this).next().css("margin-left", width + "px");
-                //                        $(this).css("height", "auto");
-                //                        $(this).find('.grammar').show('slow');
-                //                    });
-                //                    $(this).mouseleave(function () {
-                //                        $(this).css({ "height": "100px" });
-                //                        //$(this).next().css("margin-left", "0");
-
-                //                        $(this).find('.grammar').hide('slow');
-                //                    });
                 $(this).click(function (e) {
                     //var currentUrl = document.location.href.replace(/\/$/g, '');
                     //currentUrl = currentUrl.replace(/\?.*/, '');
                     var baseUrl = document.location.href.substr(0, document.location.href.indexOf('/', 'http://'.length));
-                    var corpusUrl = $("a", this).attr("href");
-                    var location = corpusUrl.substring(corpusUrl.indexOf('(') + 1, corpusUrl.indexOf(')')).replace(/:/g, '/');
-                    var popupUrl = baseUrl + '/' + location;
+                    var corpusUrl = $(this).attr("href");
+                    var locationUrl = corpusUrl.substring(corpusUrl.indexOf('(') + 1, corpusUrl.indexOf(')')).replace(/:/g, '/');
+                    var popupUrl = baseUrl + '/' + locationUrl;
+
                     //$('#basic-modal-content>iframe').attr('src', currentUrl + '/' + (i + 1));
                     $('#basic-modal-content>iframe').attr('src', popupUrl);
                     $('#basic-modal-content').modal();
                     $('#simplemodal-container').css('z-index', '20000');
                     return false;
-                });
+                })
+                    
             });
+            
         });
     </script>
 </head>

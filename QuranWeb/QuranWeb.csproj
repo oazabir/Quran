@@ -59,6 +59,12 @@
       <HintPath>..\lib\Intelligencia.UrlRewriter.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MiniProfiler">
+      <HintPath>..\packages\MiniProfiler.2.1.0\lib\net40\MiniProfiler.dll</HintPath>
+    </Reference>
+    <Reference Include="MiniProfiler.EntityFramework">
+      <HintPath>..\packages\MiniProfiler.EF.2.1.0\lib\net40\MiniProfiler.EntityFramework.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Data.Entity" />
@@ -109,6 +115,7 @@
     <Content Include="fancybox\jquery.fancybox-1.3.4.pack.js" />
     <Content Include="fancybox\jquery.mousewheel-3.0.4.pack.js" />
     <Content Include="favicon.ico" />
+    <Content Include="Global.asax" />
     <Content Include="jHtmlArea\AutoPostTest.aspx" />
     <Content Include="jHtmlArea\AutoPostTest.aspx.vb">
       <SubType>ASPXCodeBehind</SubType>
@@ -201,6 +208,9 @@
     </Compile>
     <Compile Include="Corpus.aspx.designer.cs">
       <DependentUpon>Corpus.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Search.aspx.cs">
       <DependentUpon>Search.aspx</DependentUpon>
